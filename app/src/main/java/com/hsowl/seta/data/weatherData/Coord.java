@@ -1,10 +1,10 @@
 package com.hsowl.seta.data.weatherData;
 
-public class Coord {
+class Coord {
 
 
-    private Double lon;
+    private double lon;
 
-    private Double lat;
+    private double lat;
 
 }

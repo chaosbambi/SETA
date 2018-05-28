@@ -3,51 +3,16 @@ package com.hsowl.seta.data.weatherData;
 public class Main {
 
 
-    private Double temp;
+    private double temp;
 
-    private Double tempMin;
+    private double pressure;
 
-    private Double tempMax;
-
-    private Double pressure;
-
-    private Double seaLevel;
-
-    private Double grndLevel;
-
-    private Integer humidity;
-
-    private Double tempKf;
-
-    public Double getTemp() {
+    public double getTemp() {
         return temp;
     }
 
-    public Double getTempMin() {
-        return tempMin;
-    }
-
-    public Double getTempMax() {
-        return tempMax;
-    }
-
-    public Double getPressure() {
+    public double getPressure() {
         return pressure;
     }
 
-    public Double getSeaLevel() {
-        return seaLevel;
-    }
-
-    public Double getGrndLevel() {
-        return grndLevel;
-    }
-
-    public Integer getHumidity() {
-        return humidity;
-    }
-
-    public Double getTempKf() {
-        return tempKf;
-    }
 }

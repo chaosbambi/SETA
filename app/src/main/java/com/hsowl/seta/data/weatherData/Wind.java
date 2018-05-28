@@ -2,15 +2,15 @@ package com.hsowl.seta.data.weatherData;
 
 public class Wind {
 
-    private Double speed;
+    private double speed;
 
-    private Double deg;
+    private double deg;
 
-    public Double getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
-    public Double getDeg() {
+    public double getDeg() {
         return deg;
     }
 }

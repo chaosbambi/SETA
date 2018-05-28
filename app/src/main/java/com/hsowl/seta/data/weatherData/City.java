@@ -1,10 +1,6 @@
 package com.hsowl.seta.data.weatherData;
 
-public class City {
-
-
-
-    private Integer id;
+class City {
 
     private String name;
 
@@ -12,11 +8,4 @@ public class City {
 
     private String country;
 
-    private String cod;
-
-    private Double message;
-
-    private Integer cnt;
-
-    private java.util.List<List> list = null;
 }

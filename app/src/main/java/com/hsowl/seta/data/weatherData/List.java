@@ -3,26 +3,25 @@ package com.hsowl.seta.data.weatherData;
 public class List {
 
 
-    private Integer dt;
+    private int dt;
 
     private Main main;
-
-    private java.util.List<Weather> weather = null;
 
     private Clouds clouds;
 
     private Wind wind;
 
-    public Integer getDt() {
+    private Sys sys;
+
+    private String dtTxt;
+
+
+    public int getDt() {
         return dt;
     }
 
     public Main getMain() {
         return main;
-    }
-
-    public java.util.List<Weather> getWeather() {
-        return weather;
     }
 
     public Clouds getClouds() {
@@ -40,9 +39,5 @@ public class List {
     public String getDtTxt() {
         return dtTxt;
     }
-
-    private Sys sys;
-
-    private String dtTxt;
 
 }

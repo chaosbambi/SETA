@@ -1,9 +1,8 @@
 package com.hsowl.seta.data.weatherData;
 
 
-public class Clouds {
-
-
-    private Integer all;
+class Clouds {
+    
+    private int all;
 
 }
