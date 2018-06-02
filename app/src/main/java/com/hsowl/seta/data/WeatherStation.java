@@ -1,5 +1,10 @@
 package com.hsowl.seta.data;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hsowl.seta.data.weatherData.WeatherData;
 
 public class WeatherStation {
@@ -21,17 +26,40 @@ public class WeatherStation {
     public WeatherData getWeatherData(){
         String response = null;
         String url = baseURL;
-        WeatherData weatherData = null;
 
 
         url = url.replace("{lat}",lat+"");
         url = url.replace("{lon}",lon+"");
         url = url.concat("&APPID=" + weatherApiKey);
 
-        new GetWeatherTask().execute(url,null, response);
 
-        //TODO: Fill weatherData object with Response through JSON parser
+        JSONWeatherTask task = new JSONWeatherTask();
+        try {
+            return task.execute(url).get();
+        }catch (Exception e){
+            Log.getStackTraceString(e);
+        }
 
-        return weatherData;
+        return null;
+    }
+
+    private static class JSONWeatherTask extends AsyncTask<String, Void, WeatherData>{
+
+        @Override
+        protected WeatherData doInBackground(String... strings) {
+            WeatherData wd = null;
+            String data = ((new HttpClient().getData(strings[0])));
+
+            //Parse the JSON response in a class of the WheaterData type
+            try {
+                Gson gson = new GsonBuilder().create();
+
+                wd = gson.fromJson(data, WeatherData.class);
+            }catch (Exception e){
+                Log.getStackTraceString(e);
+            }
+
+            return wd;
+        }
     }
 }

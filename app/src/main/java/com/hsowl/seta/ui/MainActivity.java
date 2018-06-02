@@ -14,5 +14,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         WeatherStation ws = new WeatherStation(52.016859, 8.904493);
         ws.getWeatherData();
+
     }
 }
