@@ -15,7 +15,7 @@ WeatherStationUnitTest {
 
         WeatherStation weatherStation = new WeatherStation(52.016859, 8.904493);
 
-        WeatherData weatherData = weatherStation.getWeatherData();
+        WeatherData weatherData = weatherStation.getCurrentWeatherData();
 
         Assert.assertNotNull(weatherData);
     }
