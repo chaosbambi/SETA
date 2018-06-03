@@ -13,4 +13,7 @@ public class HouseData {
     private double annualPowerConsumption;
 
     private WeatherStation weatherStaion;
+
+
+
 }
