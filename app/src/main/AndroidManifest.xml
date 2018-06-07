@@ -9,7 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity"></activity>
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+		<activity android:name=".ui.DeviceFragment" />
+        <activity android:name=".ui.DeviceActivity" />
+        <activity android:name=".ui.CustomSettingsFragment" />
+        <activity android:name=".ui.GraphPastForecastFragment" />
+        <activity android:name=".ui.GraphPastSmartmeterDataFragment" />
+        <activity android:name=".ui.AboutFragment" />
+        <activity android:name=".ui.HelpFragment" />
+        <activity android:name=".ui.AboutActivity" />
+        <activity android:name=".ui.CustomSettingsActivity" />
+        <activity android:name=".ui.GraphPastForecastActivity" />
+        <activity android:name=".ui.GraphPastSmartmeterDataActivity" />
+        <activity android:name=".ui.HelpActivity" />
     </application>
 
 </manifest>
