@@ -20,13 +20,7 @@
             </intent-filter>
         </activity>
 
-		<activity android:name=".ui.DeviceFragment" />
         <activity android:name=".ui.DeviceActivity" />
-        <activity android:name=".ui.CustomSettingsFragment" />
-        <activity android:name=".ui.GraphPastForecastFragment" />
-        <activity android:name=".ui.GraphPastSmartmeterDataFragment" />
-        <activity android:name=".ui.AboutFragment" />
-        <activity android:name=".ui.HelpFragment" />
         <activity android:name=".ui.AboutActivity" />
         <activity android:name=".ui.CustomSettingsActivity" />
         <activity android:name=".ui.GraphPastForecastActivity" />

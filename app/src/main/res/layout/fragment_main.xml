@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="160dp"
+                android:layout_margin="20dp"
+                android:src="@drawable/traffic_light_green_v1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Empfehlung:"
+                    android:layout_margin="20dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="160dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/traffic_light_green_v1"/>
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="160dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/traffic_light_green_v1"/>
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="160dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/traffic_light_green_v1"/>
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="160dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/traffic_light_green_v1"/>
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="160dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/traffic_light_green_v1"/>
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="160dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/traffic_light_green_v1"/>
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="160dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/traffic_light_green_v1"/>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
