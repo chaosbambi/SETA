@@ -19,7 +19,7 @@ public class HttpClient {
             con = (HttpURLConnection) (new URL(url).openConnection());
             con.setRequestMethod("GET");
             con.setDoInput(true);
-            con.setDoOutput(true);
+            //con.setDoOutput(true);
             con.connect();
 
             // Let's read the response
@@ -34,17 +34,17 @@ public class HttpClient {
             con.disconnect();
             response = buffer.toString();
         } catch (Throwable t) {
-            Log.d("Exception", Log.getStackTraceString(t));
+            Log.d("HttpClient_Exception", Log.getStackTraceString(t));
         } finally {
             try {
                 is.close();
             } catch (Throwable t) {
-                Log.getStackTraceString(t);
+                Log.d("HttpClient_Exception", Log.getStackTraceString(t));
             }
             try {
                 con.disconnect();
             } catch (Throwable t) {
-                Log.getStackTraceString(t);
+                Log.d("HttpClient_Exception", Log.getStackTraceString(t));
             }
         }
         return response;
