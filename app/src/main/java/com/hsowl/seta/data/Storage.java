@@ -36,7 +36,6 @@ public class Storage {
     public void readHouseData(){
         byte [] fileContent = null;
         try {
-            //TODO check if file exists
             FileInputStream inputStream = context.openFileInput(filename);
             fileContent = new byte[inputStream.available()];
             inputStream.read(fileContent);
@@ -44,6 +43,7 @@ public class Storage {
             houseData = gson.fromJson(fileContent.toString(), HouseData.class);
         } catch (FileNotFoundException e) {
             //TODO handle Exception
+            //erste Eingabe von Daten des Users starten
             e.printStackTrace();
         } catch (IOException e) {
             //TODO handle Exception

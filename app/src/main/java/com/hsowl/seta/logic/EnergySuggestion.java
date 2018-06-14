@@ -12,13 +12,9 @@ public class EnergySuggestion {
 
     private HouseData houseData;
 
-    public ArrayList<TrafficLightColor> getTrafficLightColors() {
-        return trafficLightColors;
-    }
+    private final double yellow_max = 4000.0;
 
-    private final double yellow_max = 100.0;
-
-    private final double yellow_min = 0.0;
+    private final double yellow_min = 200.0;
 
     public Map<Device,Suggestion> getDeviceSuggestions() {
         Map<Device,Suggestion> deviceSuggestions = null;
@@ -26,9 +22,14 @@ public class EnergySuggestion {
         return deviceSuggestions;
     }
 
+    public ArrayList<TrafficLightColor> getTrafficLightColors() {
+        return trafficLightColors;
+    }
+
+
     private TrafficLightColor trafficLightState(TrafficLightColor curColor, double power){
         //hysteresis for the given boundaries
-        final double hyst = 5.0;
+        final double hyst = 200.0;
         //if the Color won't change within the if statements it will stay the current color
         TrafficLightColor nextColor = curColor;
         //case 1 : the boundary red to yellow is undercut by the hysteresis -> traffic light turns yellow
