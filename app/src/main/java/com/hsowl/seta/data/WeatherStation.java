@@ -30,7 +30,8 @@ public class WeatherStation {
 
 
     /**
-     * This constructor creates a new WeatherStation object and initializes the weatherHistory and API-Key Attributes.
+     * This constructor creates a new WeatherStation object and initializes the weatherHistory and
+     * API-Key Attributes.
      */
     public WeatherStation(){
 
@@ -64,11 +65,12 @@ public class WeatherStation {
     }
 
     /**
-     * This Method gets a new WeatherData object with an API request, if none was fetched in the last 30 minutes. Otherwise
-     * it takes the last fetched WeatherData object. If no WeatherData objects are stored and the API request failed for
-     * any reason the method returns null.
+     * This Method gets a new WeatherData object with an API request, if none was fetched in the
+     * last 30 minutes. Otherwise it takes the last fetched WeatherData object. If no WeatherData
+     * objects are stored and the API request failed for any reason the method returns null.
      * @return  The latest WeatherData object or null if none is available.
      */
+    @Deprecated
     public WeatherData getCurrentWeatherData(){
 
         WeatherData wd = null;
@@ -119,7 +121,85 @@ public class WeatherStation {
     }
 
     /**
-     * This inner class is used to execute the API request on a different Thread and get the WeatherData object from the JSON response
+     * This Method checks if the last WeatherData object from the API is not older than 30 minutes.
+     * It does not evaluate whether the information from the API has changed in this timespan.
+     * @return  true if an update is necessare, false otherwise
+     */
+    public boolean checkForUpdates(){
+        //Check if no past WeatherData objects exist or the last one is outdated.
+        return weatherHistory.size() == 0 ||
+                weatherHistory.lastKey() + weatherUpdateDowntime < System.currentTimeMillis();
+    }
+
+    /**
+     * This Method sends a request to the OpenWeatherMap API and saves the response into a new
+     * WeaterData object which is added internally to the weatherHistory list.
+     */
+    public boolean updateWeatherData(){
+        WeatherData wd = null;
+        String response = null;
+        String url = baseZipURL;
+
+        url = url.replace("{zip}",zip+"");
+        url = url.concat("&APPID=" + weatherApiKey);
+
+        JSONWeatherTask task = new JSONWeatherTask();
+        try {
+            wd = task.execute(url).get();
+
+        }catch (Exception e){
+            Log.getStackTraceString(e);
+        }
+
+        if (wd != null){
+
+            //Add the new WeatherData object into the the history
+            weatherHistory.put(System.currentTimeMillis(),wd);
+
+            controlWeatherHistorySize();
+
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method can be used to update the latitude and longitude attributes of this object. The
+     * values will be taken from the last WeatherData object in the weatherHistory list.
+     * @return true if the values were updated succesfully, false otherwise
+     */
+    public boolean updateCoordinates(){
+        if (weatherHistory.size()>0){
+            WeatherData wd = weatherHistory.lastEntry().getValue();
+
+            this.lat = wd.getCity().getCoord().getLat();
+            this.lon = wd.getCity().getCoord().getLon();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * This method returns the last WeatherData object from the weatherHistory list or null if the
+     * list is empty.
+     * @return  a WeatherData object
+     */
+    public WeatherData getRecentWeatherData(){
+        if (weatherHistory.size() > 0){
+            return weatherHistory.lastEntry().getValue();
+        }
+        return null;
+    }
+
+    private void controlWeatherHistorySize(){
+        //TODO: Add method to control the size of the TreeMap
+    }
+
+    /**
+     * This inner class is used to execute the API request on a different Thread and get the
+     * WeatherData object from the JSON response
      */
     private static class JSONWeatherTask extends AsyncTask<String, Void, WeatherData>{
 

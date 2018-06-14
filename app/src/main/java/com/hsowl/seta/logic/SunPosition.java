@@ -2,8 +2,8 @@ package com.hsowl.seta.logic;
 
 import java.util.Date;
 
-class Sonnenstand {
-    public Sonnenstand(double lat, double lon, double azimuth, double slope) {
+class SunPosition {
+    public SunPosition(double lat, double lon, double azimuth, double slope) {
 
     }
 

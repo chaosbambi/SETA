@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 class PvPrognosis {
-    private Sonnenstand sunPosition;
+    private SunPosition sunPosition;
     private double pvPeakPower;
     private double pvGrossPower;
     private double lat;
@@ -13,7 +13,7 @@ class PvPrognosis {
     private double slope;
 
     PvPrognosis(double pvPeakPower, double lat, double lon, double azimuth, double slope){
-        this.sunPosition = new Sonnenstand(lat, lon, azimuth, slope);
+        this.sunPosition = new SunPosition(lat, lon, azimuth, slope);
         this.pvPeakPower = pvPeakPower;
         this.pvGrossPower = calculateGrossPower(pvPeakPower);
         this.lat = lat;
