@@ -13,4 +13,32 @@ public class HouseData {
     private double annualPowerConsumption;
 
     private WeatherStation weatherStaion;
+
+    public void setPvNominalPower(double pvNominalPower) {
+        this.pvNominalPower = pvNominalPower;
+    }
+
+    public void setAnnualPowerConsumption(double annualPowerConsumption) {
+        this.annualPowerConsumption = annualPowerConsumption;
+    }
+
+    public SmartMeter getSmartMeter() {
+        return smartMeter;
+    }
+
+    public ArrayList<Device> getDevices() {
+        return devices;
+    }
+
+    public double getPvNominalPower() {
+        return pvNominalPower;
+    }
+
+    public double getAnnualPowerConsumption() {
+        return annualPowerConsumption;
+    }
+
+    public WeatherStation getWeatherStaion() {
+        return weatherStaion;
+    }
 }
