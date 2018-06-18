@@ -17,6 +17,9 @@ public class SmartMeter {
 
     private final String baseURL = "http://";
 
+    public SmartMeter(String host){
+        this. host = host;
+    }
 
     public SmartMeterData requestData(){
         SmartMeterData smartMeterData = null;
@@ -36,7 +39,10 @@ public class SmartMeter {
     }
 
     private String buildDataGetURL(){
-        return baseURL.concat(host + "/data.php");
+        return baseURL.concat(host + "/mum-webservice/data.php");
+    }
+    private String buildStartGetURL(){
+        return baseURL.concat(host + "/start.php");
     }
 
 
