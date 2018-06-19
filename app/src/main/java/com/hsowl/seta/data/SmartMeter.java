@@ -77,7 +77,7 @@ public class SmartMeter {
 
         JSONSmartMeterTask task = new JSONSmartMeterTask();
         try{
-            smartMeterData = task.execute(dataUrl).get();
+            smartMeterData = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,dataUrl).get();
         }catch(Throwable t){
             Log.getStackTraceString(t);
         }
@@ -94,14 +94,26 @@ public class SmartMeter {
         @Override
         protected SmartMeterData doInBackground(String... strings) {
             SmartMeterData smd = null;
-            String data = ((new HttpClient().getData(strings[0])));
+            HttpClient httpClient = new HttpClient();
+            String data;
 
+            if (strings[0].contains("start")){
+                httpClient.initializeConnection(strings[0]);
+                data = ((httpClient.getData()));
+                httpClient.storeCookiesFromConnection();
+            }else{
+                httpClient.initializeConnection(strings[0]);
+                httpClient.addCookiesToConnection();
+                data = ((httpClient.getData()));
+            }
+
+/*
             //reformat json response
             data = data.replace("1-0:2.4.0*255","activePowerPos");
             data = data.replace("1-0:2.8.0*255", "activePowerNeg");
             data = data.replace("serial", "\"serial");
             data = data.replace(", ", ", \"");
-            data = data.replace(": ", "\": ");
+            data = data.replace(": ", "\": ");*/
 
             //Parse the JSON response in a class of the WheaterData type
             try {

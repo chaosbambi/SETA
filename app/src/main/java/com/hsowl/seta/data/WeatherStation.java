@@ -126,7 +126,9 @@ public class WeatherStation {
         @Override
         protected WeatherData doInBackground(String... strings) {
             WeatherData wd = null;
-            String data = ((new HttpClient().getData(strings[0])));
+            HttpClient httpClient = new HttpClient();
+            httpClient.initializeConnection(strings[0]);
+            String data = ((new HttpClient().getData()));
 
             //Parse the JSON response in a class of the WheaterData type
             try {
