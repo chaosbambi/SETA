@@ -36,7 +36,7 @@ public class PvPrognosis {
         //Preparations
         //Create an array with the incidence angles of the sun
         double[] incidenceAngles = new double[prognosis.length];
-        sunPosition.calcIncidenceAngles(incidenceAngles);
+        sunPosition.calcIncidenceAngles(day,incidenceAngles);
 
         //Calculate the specific times for sunrise and sunset
         Date sunRiseTime = sunPosition.getSunRiseTime(day);
