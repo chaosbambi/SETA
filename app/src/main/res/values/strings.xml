@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">SETA</string>
+
+    <string name="labelDevice">Devices</string>
+    <string name="labelMain">SeTA</string>
+    <string name="labelCustomSettings">Settings</string>
+    <string name="labelAbout">About</string>
+
+    <string name="device_activity_menu_item">Devices</string>
+    <string name="about_activity_menu_item">About</string>
+    <string name="custom_settings_activity_menu_item">Settings</string>
+
 </resources>

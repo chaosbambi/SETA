@@ -1,13 +1,11 @@
 package com.hsowl.seta.ui;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.hsowl.seta.R;
 
-public class DeviceActivity extends AppCompatActivity {
+public class DeviceActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,18 +13,5 @@ public class DeviceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_device);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Wir prüfen, ob Menü-Element mit der ID "action_daten_aktualisieren"
-        // ausgewählt wurde und geben eine Meldung aus
-
-        return super.onOptionsItemSelected(item);
-    }
 
 }

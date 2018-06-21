@@ -54,7 +54,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:inputType="number"
+                android:inputType="text"
                 android:hint="IP address smart meter"
                 android:textAlignment="textStart" />
 

@@ -25,61 +25,26 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
+                        android:orientation="vertical" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Turn on at:"/>
+                        <ImageView
+                            android:layout_width="90dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="10dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icons8_herd_100" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:textSize="30dp"
-                            android:text="17:24"/>
+                            android:text="Stove"/>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -96,7 +61,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textSize="30dp"
-                        android:text="17:24"/>
+                        android:text="11:30"/>
 
                 </LinearLayout>
 
@@ -105,21 +70,26 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="90dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="10dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icons8_haartrockner_100" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Hairdryer"/>
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -136,7 +106,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textSize="30dp"
-                        android:text="17:24"/>
+                        android:text="12:00"/>
 
                 </LinearLayout>
 
@@ -145,21 +115,26 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="90dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="10dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icons8_kaffeemaschine_100" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Coffee machine"/>
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -176,7 +151,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textSize="30dp"
-                        android:text="17:24"/>
+                        android:text="12:00"/>
 
                 </LinearLayout>
 
@@ -185,21 +160,26 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="90dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="10dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icons8_kochtopf_100" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Hob"/>
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -216,7 +196,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textSize="30dp"
-                        android:text="17:24"/>
+                        android:text="13:00"/>
 
                 </LinearLayout>
 
@@ -225,21 +205,26 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="90dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="10dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icons8_spuelmaschine_100" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Dishwasher"/>
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -256,7 +241,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textSize="30dp"
-                        android:text="17:24"/>
+                        android:text="13:30"/>
 
                 </LinearLayout>
 
@@ -265,21 +250,26 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="90dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="10dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icons8_toaster_100" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Toaster"/>
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -296,7 +286,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textSize="30dp"
-                        android:text="17:24"/>
+                        android:text="14:00"/>
 
                 </LinearLayout>
 
@@ -305,21 +295,26 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="90dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="10dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icons8_waschmaschine_100" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Washing machine"/>
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -336,247 +331,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textSize="30dp"
-                        android:text="17:24"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Turn on at:"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textSize="30dp"
-                        android:text="17:24"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Turn on at:"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textSize="30dp"
-                        android:text="17:24"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Turn on at:"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textSize="30dp"
-                        android:text="17:24"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Turn on at:"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textSize="30dp"
-                        android:text="17:24"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Turn on at:"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textSize="30dp"
-                        android:text="17:24"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="90dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/traffic_light_green_v1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Device1"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingEnd="20dp"
-                        android:paddingRight="20dp"
-                        android:text="Turn on at:"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textSize="30dp"
-                        android:text="17:24"/>
+                        android:text="14:30"/>
 
                 </LinearLayout>
 

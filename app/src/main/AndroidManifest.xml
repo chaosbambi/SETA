@@ -5,14 +5,15 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label=""
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <activity
             android:name=".ui.MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,9 +21,36 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.DeviceActivity" />
-        <activity android:name=".ui.AboutActivity" />
-        <activity android:name=".ui.CustomSettingsActivity" />
+        <activity
+            android:name=".ui.DeviceActivity"
+            android:label="@string/labelDevice"
+            android:parentActivityName=".ui.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.hsowl.seta.ui.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".ui.CustomSettingsActivity"
+            android:label="@string/labelCustomSettings"
+            android:parentActivityName=".ui.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.hsowl.seta.ui.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".ui.AboutActivity"
+            android:label="@string/labelAbout"
+            android:parentActivityName=".ui.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.hsowl.seta.ui.MainActivity" />
+        </activity>
+
+
+
+
         <activity android:name=".ui.GraphPastForecastActivity" />
         <activity android:name=".ui.GraphPastSmartmeterDataActivity" />
         <activity android:name=".ui.HelpActivity" />

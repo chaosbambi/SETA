@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,12 +18,11 @@
             android:layout_marginLeft="40dp"
             android:layout_marginBottom="40dp"
             android:textSize="30dp"
-            android:text="powered by"/>
+            android:text="powered by" />
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="150dp"
             android:src="@drawable/seta_logo" />
 
         <TextView
@@ -36,14 +36,12 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/logo_hsowl"/>
+            android:src="@drawable/logo_hs_owl" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/ife_logo" />
-
-
 
     </LinearLayout>
 
