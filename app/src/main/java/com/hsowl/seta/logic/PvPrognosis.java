@@ -33,67 +33,68 @@ public class PvPrognosis {
      */
     public void calculatePvPrognosis(double[] prognosis, double[] weatherFactor, Date day){
 
-        //Preparations
-        //Create an array with the incidence angles of the sun
-        double[] incidenceAngles = new double[prognosis.length];
-        sunPosition.calcIncidenceAngles(day,incidenceAngles);
+
 
         //Calculate the specific times for sunrise and sunset
         Date sunRiseTime = sunPosition.getSunRiseTime(day);
         Date sunSetTime = sunPosition.getSunSetTime(day);
 
         //Calculate the intensity of the suns radiation
-        double radiationIntensity = sunPosition.calcRadiationIntensity(day);
+        double radiationIntensity;
 
 
 
-
-        //Calculate the factor to multiply with the peak power
-        double[] factor = new double[prognosis.length];
+        double factor;
         Date partOffTheDay = new Date(day.getYear(),day.getMonth(),day.getDate());
-        int stepWidth = 60*60*24/factor.length;
+        int stepWidth = 60*60*24/prognosis.length;
         int timeInSeconds;
-        for (int i = 0; i < factor.length; i++){
-            factor[i] = Math.cos(Math.toRadians(incidenceAngles[i]));
+        for (int i = 0; i < prognosis.length; i++) {
 
-            if (factor[i] < 0){
-                factor[i] = 0;
-            }
-            timeInSeconds = i*stepWidth;
+            timeInSeconds = partOffTheDay.getSeconds() + stepWidth;
             partOffTheDay.setSeconds(timeInSeconds);
+            //Calculate the factor to multiply with the peak power
+            factor = Math.cos(Math.toRadians(sunPosition.getIncideceAngle(partOffTheDay)));
+
+            if (factor < 0) {
+                factor = 0;
+            }
+
 
             if (sunRiseTime.getTime() > partOffTheDay.getTime()) {
-                factor[i] = 0;
+                factor = 0;
             }
 
             if (sunSetTime.getTime() < partOffTheDay.getTime()) {
-                factor[i] = 0;
+                factor = 0;
             }
-        }
 
-        try{
-            for (int j = 0; j < prognosis.length; j++){
+            radiationIntensity = sunPosition.calcRadiationIntensity(partOffTheDay);
+
+
+            try {
+
                 //Calculate optimal outcome
-                double optOutcome = pvGrossPower * radiationIntensity * factor [j];
+                double optOutcome = pvGrossPower * radiationIntensity * factor;
 
-                if (weatherFactor[j] > 100){
-                    weatherFactor[j] = 100;
-                }else if(weatherFactor[j] < 0){
-                    weatherFactor[j] = 0;
+                if (weatherFactor[i] > 100) {
+                    weatherFactor[i] = 100;
+                } else if (weatherFactor[i] < 0) {
+                    weatherFactor[i] = 0;
                 }
 
                 //Outcome with usage of weather information
-                double totalOutcome = optOutcome * ((11.0/1000.0 * Math.pow(weatherFactor[j], 2) - 41.0/20.0 * weatherFactor[j] + 200.0) /100.0);
+                double totalOutcome = optOutcome * ((11.0 / 1000.0 * Math.pow(weatherFactor[i], 2) - 41.0 / 20.0 * weatherFactor[i] + 200.0) / 100.0);
 
-                if (totalOutcome > pvPeakPower){
-                    prognosis[j] = pvPeakPower;
-                }else {
-                    prognosis[j] = totalOutcome;
+                if (totalOutcome > pvPeakPower) {
+                    prognosis[i] = pvPeakPower;
+                } else {
+                    prognosis[i] = totalOutcome;
                 }
+
+            } catch (Exception e) {
+                Log.getStackTraceString(e);
+                throw e;
             }
-        }catch (Exception e){
-            Log.getStackTraceString(e);
-            throw e;
         }
     }
 

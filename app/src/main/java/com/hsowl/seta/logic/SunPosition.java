@@ -68,25 +68,6 @@ class SunPosition {
         return airmass;
     }
 
-    public void calcIncidenceAngles(Date date, double angles[]) {
-        //creates array that divides day of date into as many parts as the length of angles array
-        Date []dates= new Date[angles.length];
-        int stepWidth = 60*60*24/dates.length;
-        int timeInSeconds;
-        for(int i=0; i<dates.length; i++){
-            dates[i] = new Date(date.getYear(),date.getMonth(),date.getDate());
-            timeInSeconds = i*stepWidth;
-            dates[i].setSeconds(timeInSeconds);
-
-        }
-
-        // Berechnung der Einfallswinkel
-        for (int i = 0; i < dates.length; i++) {
-            angles[i] = getIncideceAngle(dates[i]);
-        }
-
-    }
-
     public double calcRadiationIntensity(Date date) {
         double airmass = calcAirmass(date);
         if (airmass < 0) {
@@ -139,7 +120,7 @@ class SunPosition {
         return legalTime;
     }
 
-    private double getIncideceAngle(Date date) {
+    public double getIncideceAngle(Date date) {
         // Berechnet notwendige Variablen
         double dayNum = SunPosition.calcDayNum(date);
         double trueLocalTime = calcTrueLocalTime(date);
