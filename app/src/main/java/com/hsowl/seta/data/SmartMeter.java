@@ -107,14 +107,6 @@ public class SmartMeter {
                 data = ((httpClient.getData()));
             }
 
-/*
-            //reformat json response
-            data = data.replace("1-0:2.4.0*255","activePowerPos");
-            data = data.replace("1-0:2.8.0*255", "activePowerNeg");
-            data = data.replace("serial", "\"serial");
-            data = data.replace(", ", ", \"");
-            data = data.replace(": ", "\": ");*/
-
             //Parse the JSON response in a class of the WheaterData type
             try {
                 Gson gson = new GsonBuilder().create();
