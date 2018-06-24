@@ -11,7 +11,7 @@ import static java.lang.Math.tan;
 import static java.lang.Math.toDegrees;
 import static java.lang.Math.toRadians;
 
-class SunPosition {
+public class SunPosition {
     private double lat;
     private double lon;
     private double azimuth;
@@ -57,14 +57,14 @@ class SunPosition {
         return trueLocalTime;
     }
 
-    private double calcAirmass(Date date) {
+    public double calcAirmass(Date date) {
         double trueLocalTime = calcTrueLocalTime(date);
         double hourAngle = SunPosition.calcHourAngle(trueLocalTime);
         double dayNum = SunPosition.calcDayNum(date);
         double declination = SunPosition.calcDeclination(dayNum);
         //calculate airMass
-        double airmass = 1 / sin(toRadians(declination)) * sin(toRadians(lat)) +
-                cos(toRadians(declination)) * cos(toRadians(lat)) * cos(toRadians(hourAngle));
+        double airmass = 1 / (sin(toRadians(declination)) * sin(toRadians(lat)) +
+                cos(toRadians(declination)) * cos(toRadians(lat)) * cos(toRadians(hourAngle)));
         return airmass;
     }
 

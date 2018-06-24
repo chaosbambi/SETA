@@ -2,7 +2,6 @@ package com.hsowl.seta.logic;
 
 import android.util.Log;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class PvPrognosis {
@@ -33,8 +32,6 @@ public class PvPrognosis {
      */
     public void calculatePvPrognosis(double[] prognosis, double[] weatherFactor, Date day){
 
-
-
         //Calculate the specific times for sunrise and sunset
         Date sunRiseTime = sunPosition.getSunRiseTime(day);
         Date sunSetTime = sunPosition.getSunSetTime(day);
@@ -42,16 +39,12 @@ public class PvPrognosis {
         //Calculate the intensity of the suns radiation
         double radiationIntensity;
 
-
-
         double factor;
         Date partOffTheDay = new Date(day.getYear(),day.getMonth(),day.getDate());
         int stepWidth = 60*60*24/prognosis.length;
         int timeInSeconds;
         for (int i = 0; i < prognosis.length; i++) {
 
-            timeInSeconds = partOffTheDay.getSeconds() + stepWidth;
-            partOffTheDay.setSeconds(timeInSeconds);
             //Calculate the factor to multiply with the peak power
             factor = Math.cos(Math.toRadians(sunPosition.getIncideceAngle(partOffTheDay)));
 
@@ -83,7 +76,7 @@ public class PvPrognosis {
                 }
 
                 //Outcome with usage of weather information
-                double totalOutcome = optOutcome * ((11.0 / 1000.0 * Math.pow(weatherFactor[i], 2) - 41.0 / 20.0 * weatherFactor[i] + 200.0) / 100.0);
+                double totalOutcome = optOutcome * ((11.0 / 1000.0 * Math.pow(weatherFactor[i], 2) - 41.0 / 20.0 * weatherFactor[i] + 100.0) / 100.0);
 
                 if (totalOutcome > pvPeakPower) {
                     prognosis[i] = pvPeakPower;
@@ -95,6 +88,9 @@ public class PvPrognosis {
                 Log.getStackTraceString(e);
                 throw e;
             }
+
+            timeInSeconds = partOffTheDay.getSeconds() + stepWidth;
+            partOffTheDay.setSeconds(timeInSeconds);
         }
     }
 
