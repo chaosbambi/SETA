@@ -8,6 +8,7 @@ import static java.lang.Math.cos;
 import static java.lang.Math.pow;
 import static java.lang.Math.sin;
 import static java.lang.Math.tan;
+import static java.lang.Math.toDegrees;
 import static java.lang.Math.toRadians;
 
 class SunPosition {
@@ -26,7 +27,7 @@ class SunPosition {
 
     // returns the day in the tropical calender
     private static double calcDayNum(Date day) {
-        return 30.3 * day.getMonth() - 1 + day.getDay();
+        return 30.3 * day.getMonth()  + day.getDate();
     }
 
     // calculates the declination of the sun by wagner approximations
@@ -73,11 +74,10 @@ class SunPosition {
         int stepWidth = 60*60*24/dates.length;
         int timeInSeconds;
         for(int i=0; i<dates.length; i++){
-            dates[i] = new Date(date.getYear(),date.getMonth(),date.getDay());
+            dates[i] = new Date(date.getYear(),date.getMonth(),date.getDate());
             timeInSeconds = i*stepWidth;
-            dates[i].setSeconds(timeInSeconds%60);
-            dates[i].setMinutes((timeInSeconds/60)%60);
-            dates[i].setHours(timeInSeconds/(60*60));
+            dates[i].setSeconds(timeInSeconds);
+
         }
 
         // Berechnung der Einfallswinkel
@@ -101,7 +101,7 @@ class SunPosition {
         double dayNum = SunPosition.calcDayNum(day);
         double declination = SunPosition.calcDeclination(dayNum);
         // Berechnung des Stundenwinkels
-        double hourAngle = acos(-tan(toRadians(declination)) * tan(toRadians(lat)));
+        double hourAngle = toDegrees(acos(-tan(toRadians(declination)) * tan(toRadians(lat))));
 
         double hourAngleSunrise = abs(hourAngle);
         // Umrechnung in gesetzliche Zeit
@@ -115,7 +115,7 @@ class SunPosition {
         double dayNum = SunPosition.calcDayNum(day);
         double declination = SunPosition.calcDeclination(dayNum);
         // Berechnung des Stundenwinkels
-        double hourAngle = Math.acos(-tan(toRadians(declination)) * tan(toRadians(lat)));
+        double hourAngle = toDegrees(Math.acos(-tan(toRadians(declination)) * tan(toRadians(lat))));
 
         double hourAngleSunSet = -abs(hourAngle);
         // Umrechnung in gesetzliche Zeit
@@ -133,10 +133,10 @@ class SunPosition {
         double trueLocalTime = SunPosition.convertTrueLocalTime(hourAngle);
         // Berechnung der gesetzlichen Zeit
         double dateTimeInHours = (trueLocalTime - (timeDeviation + (lon - referencedMeridian) / 15));
-        day.setHours((int)dateTimeInHours);
-        day.setMinutes((int)(dateTimeInHours*60)-(int)dateTimeInHours);
-        day.setSeconds((int)(dateTimeInHours*60*60)-(int)(dateTimeInHours*60));
-        return day;
+        Date legalTime = new Date(day.getYear(),day.getMonth(),day.getDate());
+
+        legalTime.setSeconds((int)(dateTimeInHours*60*60));
+        return legalTime;
     }
 
     private double getIncideceAngle(Date date) {
@@ -146,7 +146,7 @@ class SunPosition {
         double hourAngle = SunPosition.calcHourAngle(trueLocalTime);
         double declination = SunPosition.calcDeclination(dayNum);
         // Berechnung des Einfallswinkels
-        double incidenceAngle = acos(sin(toRadians(declination)) * sin(toRadians(lat)) * cos(toRadians(slope)) + sin(toRadians(declination)) * cos(toRadians(lat)) * sin(toRadians(slope)) * cos(toRadians(azimuth)) + cos(toRadians(declination)) * cos(toRadians(lat)) * cos(toRadians(slope)) * cos(toRadians(hourAngle)) - cos(toRadians(declination)) * sin(toRadians(lat)) * sin(toRadians(slope)) * cos(toRadians(azimuth)) * cos(toRadians(hourAngle)) + cos(toRadians(declination)) * sin(toRadians(slope)) * sin(toRadians(azimuth)) * sin(toRadians(hourAngle)));
+        double incidenceAngle = toDegrees(acos(sin(toRadians(declination)) * sin(toRadians(lat)) * cos(toRadians(slope)) + sin(toRadians(declination)) * cos(toRadians(lat)) * sin(toRadians(slope)) * cos(toRadians(azimuth)) + cos(toRadians(declination)) * cos(toRadians(lat)) * cos(toRadians(slope)) * cos(toRadians(hourAngle)) - cos(toRadians(declination)) * sin(toRadians(lat)) * sin(toRadians(slope)) * cos(toRadians(azimuth)) * cos(toRadians(hourAngle)) + cos(toRadians(declination)) * sin(toRadians(slope)) * sin(toRadians(azimuth)) * sin(toRadians(hourAngle))));
         return incidenceAngle;
     }
 

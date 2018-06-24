@@ -45,25 +45,30 @@ public class PvPrognosis {
         //Calculate the intensity of the suns radiation
         double radiationIntensity = sunPosition.calcRadiationIntensity(day);
 
+
+
+
         //Calculate the factor to multiply with the peak power
         double[] factor = new double[prognosis.length];
+        Date partOffTheDay = new Date(day.getYear(),day.getMonth(),day.getDate());
+        int stepWidth = 60*60*24/factor.length;
+        int timeInSeconds;
         for (int i = 0; i < factor.length; i++){
             factor[i] = Math.cos(Math.toRadians(incidenceAngles[i]));
 
             if (factor[i] < 0){
                 factor[i] = 0;
             }
+            timeInSeconds = i*stepWidth;
+            partOffTheDay.setSeconds(timeInSeconds);
 
-            int hourOffDay =  (int)(24 * ((double)i/factor.length));
-            int minuteOffHour = (int) (24 * 60 * ((double)i/factor.length)) % 60;
-            Calendar partOffTheDay = Calendar.getInstance();
-            partOffTheDay.set(day.getYear(),day.getMonth(),day.getDate(),hourOffDay,minuteOffHour);
-
-            if (sunRiseTime.getTime() > partOffTheDay.getTimeInMillis())
+            if (sunRiseTime.getTime() > partOffTheDay.getTime()) {
                 factor[i] = 0;
+            }
 
-            if (sunSetTime.getTime() < partOffTheDay.getTimeInMillis())
+            if (sunSetTime.getTime() < partOffTheDay.getTime()) {
                 factor[i] = 0;
+            }
         }
 
         try{
