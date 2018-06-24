@@ -52,7 +52,7 @@ class SunPosition {
         double dayNum = SunPosition.calcDayNum(date);
         double timeDeviation = SunPosition.calcTimeDeviation(dayNum);
         double timeInHours = date.getHours() + date.getMinutes()/60.0 + date.getSeconds()/(60.0*60.0);
-        double referencedMeridian = date.getTimezoneOffset() / 60.0 * 15;
+        double referencedMeridian = - date.getTimezoneOffset() / 60.0 * 15;
         double trueLocalTime = timeInHours + (timeDeviation + (lon - referencedMeridian) / 15);
         return trueLocalTime;
     }
@@ -115,7 +115,7 @@ class SunPosition {
         double dayNum = SunPosition.calcDayNum(day);
         double declination = SunPosition.calcDeclination(dayNum);
         // Berechnung des Stundenwinkels
-        double hourAngle = toDegrees(Math.acos(-tan(toRadians(declination)) * tan(toRadians(lat))));
+        double hourAngle = toDegrees(acos(-tan(toRadians(declination)) * tan(toRadians(lat))));
 
         double hourAngleSunSet = -abs(hourAngle);
         // Umrechnung in gesetzliche Zeit
@@ -128,7 +128,7 @@ class SunPosition {
         //Berechne notwendige Variablen
         double dayNum = SunPosition.calcDayNum(day);
         double timeDeviation = SunPosition.calcTimeDeviation(dayNum);
-        double timezone = day.getTimezoneOffset() / 60.0;
+        double timezone = - day.getTimezoneOffset() / 60.0;
         double referencedMeridian = timezone * 15;
         double trueLocalTime = SunPosition.convertTrueLocalTime(hourAngle);
         // Berechnung der gesetzlichen Zeit
