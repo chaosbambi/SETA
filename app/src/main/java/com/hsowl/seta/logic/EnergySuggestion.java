@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class EnergySuggestion {
 
-    private ArrayList<TrafficLightColor> trafficLightColors;
+    private TrafficLightColor [] trafficLightColors;
 
     private HouseData houseData;
 
@@ -22,7 +22,30 @@ public class EnergySuggestion {
         return deviceSuggestions;
     }
 
-    public ArrayList<TrafficLightColor> getTrafficLightColors() {
+    public TrafficLightColor [] getTrafficLightColors(TrafficLightColor curColor) {
+        //get current power consumption
+        double activePowplus = houseData.getActivePowPlus();
+        // get current and future power production
+        double [] activePowMinusPredict = houseData.getActivePowMinusPredict();
+
+        //create an array for traffiic light colors in prediction length
+        trafficLightColors = new TrafficLightColor[activePowMinusPredict.length];
+
+        double power;
+        //calculate each color in the array
+        for(int i = 0 ; i < trafficLightColors.length ; i++){
+            // calculate difference between consumption and production
+            power = activePowplus - activePowMinusPredict[i];
+            //in the first iteration user old traffic light color to calculate next one
+            if(i == 0){
+                trafficLightColors[i] = trafficLightState(curColor,power);
+            //for every other iteration use previous traffic light color
+            } else{
+                trafficLightColors[i] = trafficLightState(trafficLightColors[i-1],power);
+            }
+
+        }
+
         return trafficLightColors;
     }
 
