@@ -8,7 +8,7 @@ public class HouseData {
 
     private double annualPowerConsumption;
 
-    private WeatherStation weatherStaion;
+    private OpenWeatherStation weatherStaion;
 
     private SmartMeter smartMeter;
 
@@ -34,7 +34,7 @@ public class HouseData {
         return annualPowerConsumption;
     }
 
-    public WeatherStation getWeatherStaion() {
+    public OpenWeatherStation getWeatherStaion() {
         return weatherStaion;
     }
 
