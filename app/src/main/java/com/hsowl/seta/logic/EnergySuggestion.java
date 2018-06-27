@@ -22,11 +22,12 @@ public class EnergySuggestion {
         return deviceSuggestions;
     }
 
-    public TrafficLightColor [] getTrafficLightColors(TrafficLightColor curColor) {
+    public TrafficLightColor [] getTrafficLightColors(TrafficLightColor curColor) throws Exception {
         //get current power consumption
         double activePowplus = houseData.getActivePowPlus();
         // get current and future power production
-        double [] activePowMinusPredict = houseData.getActivePowMinusPredict();
+        double [] activePowMinusPredict = new double[24];
+        houseData.getActivePowMinusPredict(activePowMinusPredict);
 
         //create an array for traffiic light colors in prediction length
         trafficLightColors = new TrafficLightColor[activePowMinusPredict.length];

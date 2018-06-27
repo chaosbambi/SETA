@@ -1,6 +1,10 @@
 package com.hsowl.seta.data;
 
+import com.hsowl.seta.logic.PvPrognosis;
+
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HouseData {
 
@@ -62,8 +66,7 @@ public class HouseData {
         return activePowPlus;
     }
 
-    public double [] getActivePowMinusPredict(){
-        double activePowMinusPredict[] = new double [24];
+    public void getActivePowMinusPredict(double activePowMinusPredict[]) throws Exception {
         double activePowMinus = 1.0;
         //check if user has smart meter
         if (smartMeter != null) {
@@ -76,10 +79,24 @@ public class HouseData {
             }
         }
 
-        //TODO weather data and prediction sequence
+
+        double[] weatherFactor = new double[activePowMinusPredict.length];
 
 
-        return activePowMinusPredict;
+        if(weatherStaion == null){
+            throw new Exception("No Weather Station");
+        } else{
+            weatherStaion.getWeatherFactor(weatherFactor);
+        }
+        //TODO fill with right values
+        PvPrognosis pvp = new PvPrognosis(pvNominalPower,0,0,0,0);
+
+        pvp.calculatePvPrognosis(activePowMinusPredict,weatherFactor, new Date());
+
+        if(activePowMinus <=0 ){
+            activePowMinusPredict[0] = activePowMinus;
+        }
+
     }
 
 }
