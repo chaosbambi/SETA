@@ -4,22 +4,18 @@ import java.util.ArrayList;
 
 public class HouseData {
 
-    private SmartMeter smartMeter;
-
-    private ArrayList<Device> devices;
-
-    private double pvNominalPower;
+    private double pvPeakPower;
 
     private double annualPowerConsumption;
 
     private WeatherStation weatherStaion;
 
-    public void setPvNominalPower(double pvNominalPower) {
-        this.pvNominalPower = pvNominalPower;
-    }
+    private SmartMeter smartMeter;
 
-    public void setAnnualPowerConsumption(double annualPowerConsumption) {
-        this.annualPowerConsumption = annualPowerConsumption;
+    private ArrayList<Device> devices;
+
+    public HouseData(){
+        this.devices = new ArrayList<>();
     }
 
     public SmartMeter getSmartMeter() {
@@ -30,8 +26,8 @@ public class HouseData {
         return devices;
     }
 
-    public double getPvNominalPower() {
-        return pvNominalPower;
+    public double getPvPeakPower() {
+        return pvPeakPower;
     }
 
     public double getAnnualPowerConsumption() {
@@ -41,4 +37,13 @@ public class HouseData {
     public WeatherStation getWeatherStaion() {
         return weatherStaion;
     }
+
+    public void setPvPeakPower(double pvPeakPower) {
+        this.pvPeakPower = pvPeakPower;
+    }
+
+    public void setAnnualPowerConsumption(double annualPowerConsumption) {
+        this.annualPowerConsumption = annualPowerConsumption;
+    }
+
 }
