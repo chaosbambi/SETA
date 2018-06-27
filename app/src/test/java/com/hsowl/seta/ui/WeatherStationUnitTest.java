@@ -1,6 +1,6 @@
 package com.hsowl.seta.ui;
 
-import com.hsowl.seta.data.WeatherStation;
+import com.hsowl.seta.data.OpenWeatherStation;
 import com.hsowl.seta.data.weatherData.City;
 import com.hsowl.seta.data.weatherData.WeatherData;
 
@@ -10,7 +10,7 @@ WeatherStationUnitTest {
     public void testApiCall(){
         //Deprecated if using ZIP-Code based request
         /*
-        WeatherStation weatherStation = new WeatherStation(52.016859, 8.904493);
+        OpenWeatherStation weatherStation = new OpenWeatherStation(52.016859, 8.904493);
 
         WeatherData weatherData = weatherStation.getCurrentWeatherData();
 
@@ -20,7 +20,7 @@ WeatherStationUnitTest {
 
     public void textToCopyInMainAcivityForTest(){
 
-        WeatherStation ws = new WeatherStation();
+        OpenWeatherStation ws = new OpenWeatherStation();
 
         ws.setZip((short) 32657);
 
