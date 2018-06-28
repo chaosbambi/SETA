@@ -1,8 +1,11 @@
 package com.hsowl.seta.data.weatherData;
 
 
-class Clouds {
-    
+public class Clouds {
+
     private int all;
 
+    public int getAll() {
+        return all;
+    }
 }

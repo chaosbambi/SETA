@@ -21,8 +21,4 @@ public class MainActivity extends Activity { //TODO ggf. andere Activites auch v
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
-
-
-
 }

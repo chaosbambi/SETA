@@ -4,11 +4,11 @@ public class WeatherData {
 
     private City city;
 
-    private List list;
+    private java.util.List<List> list;
 
     public City getCity() {
         return city;
     }
 
-    public List getList() { return list; }
+    public java.util.List<List> getList() { return list; }
 }

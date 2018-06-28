@@ -1,11 +1,15 @@
 package com.hsowl.seta.data.weatherData;
 
-class City {
+public class City {
 
     private String name;
 
     private Coord coord;
 
     private String country;
+
+    public Coord getCoord() {
+        return coord;
+    }
 
 }
