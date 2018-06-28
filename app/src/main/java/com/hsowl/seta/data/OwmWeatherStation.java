@@ -9,15 +9,9 @@ import com.hsowl.seta.data.weatherData.WeatherData;
 
 import java.util.TreeMap;
 
-public class OpenWeatherStation extends WeatherStation{
+public class OwmWeatherStation extends WeatherStation{
 
     private TreeMap<Long,WeatherData> weatherHistory;
-
-    private double lat;
-
-    private double lon;
-
-    private int zip;
 
     private String weatherApiKey;
 
@@ -30,10 +24,10 @@ public class OpenWeatherStation extends WeatherStation{
 
 
     /**
-     * This constructor creates a new OpenWeatherStation object and initializes the weatherHistory and
+     * This constructor creates a new OwmWeatherStation object and initializes the weatherHistory and
      * API-Key Attributes.
      */
-    public OpenWeatherStation(){
+    public OwmWeatherStation(){
 
         this.weatherApiKey = SensitiveData.OPEN_WEATHER_API_KEY;
         this.weatherHistory = new TreeMap<>();
@@ -56,13 +50,7 @@ public class OpenWeatherStation extends WeatherStation{
         return weatherHistory;
     }
 
-    public double getLat() {
-        return lat;
-    }
 
-    public double getLon() {
-        return lon;
-    }
 
     /**
      * This Method gets a new WeatherData object with an API request, if none was fetched in the
@@ -102,7 +90,7 @@ public class OpenWeatherStation extends WeatherStation{
 
             if (wd != null){
 
-                //Update the latitude and longitude values of the OpenWeatherStation object.
+                //Update the latitude and longitude values of the OwmWeatherStation object.
                 this.lat = wd.getCity().getCoord().getLat();
                 this.lon = wd.getCity().getCoord().getLon();
 
@@ -118,6 +106,21 @@ public class OpenWeatherStation extends WeatherStation{
             wd = weatherHistory.lastEntry().getValue();
 
         return wd;
+    }
+
+    @Override
+    public void getWeatherFactor(double[] weatherFactor) {
+        WeatherData wd = weatherHistory.lastEntry().getValue();
+        int remainder = weatherFactor.length % 8;
+        for(int i = 0; i < 8 ; i++) {
+            for (int j = 0; j < weatherFactor.length / 8; j++) {
+                weatherFactor[i * 8 + j] = wd.getList().get(i).getClouds().getAll() / 100.0;
+            }
+        }
+        //fill remaining array fields with last forecast
+        for(int i = weatherFactor.length - remainder ; i< i + remainder ; i++){
+            weatherFactor[i] = wd.getList().get(8).getClouds().getAll() / 100.0;
+        }
     }
 
     /**
@@ -206,7 +209,12 @@ public class OpenWeatherStation extends WeatherStation{
         @Override
         protected WeatherData doInBackground(String... strings) {
             WeatherData wd = null;
-            String data = ((new HttpClient().getData(strings[0])));
+
+            HttpClient httpClient = new HttpClient();
+            String data;
+
+            httpClient.initializeConnection(strings[0]);
+            data = ((httpClient.getData()));
 
             //Parse the JSON response in a class of the WheaterData type
             try {
