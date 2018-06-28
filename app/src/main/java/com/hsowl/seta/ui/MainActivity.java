@@ -15,7 +15,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         SmartMeter sm = new SmartMeter("sem100");
-        SmartMeterData smd = sm.requestData();
+        SmartMeterData smd = null;
+        if(sm.checkAuthentication()){
+            smd = sm.requestData();
+        }
 
         smd.getStatus();
     }
