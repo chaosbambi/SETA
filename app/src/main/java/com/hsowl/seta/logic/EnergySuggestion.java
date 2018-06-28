@@ -24,19 +24,19 @@ public class EnergySuggestion {
 
     public TrafficLightColor [] getTrafficLightColors(TrafficLightColor curColor) throws Exception {
         //get current power consumption
-        double activePowplus = houseData.getActivePowPlus();
+        double activePowPlus = houseData.getActivePowPlus();
         // get current and future power production
         double [] activePowMinusPredict = new double[24];
         houseData.getActivePowMinusPredict(activePowMinusPredict);
 
-        //create an array for traffiic light colors in prediction length
+        //create an array for traffic light colors in prediction length
         trafficLightColors = new TrafficLightColor[activePowMinusPredict.length];
 
         double power;
         //calculate each color in the array
         for(int i = 0 ; i < trafficLightColors.length ; i++){
             // calculate difference between consumption and production
-            power = activePowplus - activePowMinusPredict[i];
+            power = activePowPlus - activePowMinusPredict[i];
             //in the first iteration user old traffic light color to calculate next one
             if(i == 0){
                 trafficLightColors[i] = trafficLightState(curColor,power);
