@@ -5,6 +5,7 @@
     <string name="labelMain">SeTA</string>
     <string name="labelCustomSettings">Settings</string>
     <string name="labelAbout">About</string>
+    <string name="labelHelp">Help</string>
 
     <string name="device_activity_menu_item">Devices</string>
     <string name="about_activity_menu_item">About</string>

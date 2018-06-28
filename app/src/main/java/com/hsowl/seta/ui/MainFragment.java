@@ -9,13 +9,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hsowl.seta.R;
 import com.hsowl.seta.data.HouseData;
 import com.hsowl.seta.logic.EnergySuggestion;
 import com.hsowl.seta.logic.TrafficLightColor;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MainFragment extends Fragment {
 
@@ -23,14 +28,15 @@ public class MainFragment extends Fragment {
     HouseData houseDate;
     EnergySuggestion energySuggestion;
     List<TrafficLightColor> trafficLightColorsList;
+    String[] trafficLightsForecastIntervalls;
+    Map<ImageView, String> trafficLightsForecastData;
+    LinearLayout llTrafficLightsForecastView;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //houseDate = Storage.getHouseData();
-        //energySuggestion = new EnergySuggestion(houseDate);
-        //trafficLightColorsList = energySuggestion.getTrafficLightColors();
 
         setHasOptionsMenu(true);
     }
@@ -77,7 +83,54 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
+        //houseDate = Storage.getHouseData();
+        //energySuggestion = new EnergySuggestion(houseDate);
+        //trafficLightColorsList = energySuggestion.getTrafficLightColors();
+
+        trafficLightColorsList = new ArrayList<>();
+        trafficLightColorsList.add(TrafficLightColor.Red);
+
+        trafficLightsForecastIntervalls = buildIntervallsForTrafficLightForecast(1, "h");
+
+        createCustomTrafficLightForecastView(rootView, trafficLightsForecastIntervalls);
+
         return rootView;
+    }
+
+    private String[] buildIntervallsForTrafficLightForecast(int intervall, String unit) {
+        String [] intervallStrings = new String[23];
+
+        for(String item : intervallStrings) {
+            item = "+" + String.valueOf(intervall) + " min" + unit;
+            intervall += intervall;
+        }
+
+        return intervallStrings;
+    }
+
+    private void createCustomTrafficLightForecastView(View rootView, String[] trafficLightsForecastIntervalls) {
+        llTrafficLightsForecastView = (LinearLayout) rootView.findViewById(R.id.trafficLightsForecast);
+        LayoutInflater inflaterCustomView = LayoutInflater.from(getActivity());
+        for(int i=0; i<trafficLightColorsList.size(); i++){
+            View view = inflaterCustomView.inflate(R.layout.traffic_light_item, llTrafficLightsForecastView, false);
+
+            switch (trafficLightColorsList.get(i)) {
+                case Green:
+                    ((ImageView)view.findViewById(R.id.trafficLightImage)).setImageResource(R.drawable.traffic_light_green_v3);
+                    ((TextView)view.findViewById(R.id.trafficLightTextView)).setText(trafficLightsForecastIntervalls[i]);
+                    break;
+                case Yellow:
+                    ((ImageView)view.findViewById(R.id.trafficLightImage)).setImageResource(R.drawable.traffic_light_yellow_v3);
+                    ((TextView)view.findViewById(R.id.trafficLightTextView)).setText(trafficLightsForecastIntervalls[i]);
+                    break;
+                case Red:
+                    ((ImageView)view.findViewById(R.id.trafficLightImage)).setImageResource(R.drawable.traffic_light_red_v3);
+                    ((TextView)view.findViewById(R.id.trafficLightTextView)).setText(trafficLightsForecastIntervalls[i]);
+                    break;
+            }
+
+            llTrafficLightsForecastView.addView(view);
+        }
     }
 
 }
