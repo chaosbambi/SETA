@@ -40,7 +40,7 @@ public class PvPrognosis {
         double radiationIntensity;
 
         double factor;
-        Date partOffTheDay = new Date(day.getYear(),day.getMonth(),day.getDate());
+        Date partOffTheDay = new Date(day.getYear(),day.getMonth(),day.getDate(),day.getHours(),day.getMinutes(),day.getSeconds());
         int stepWidth = 60*60*24/prognosis.length;
         int timeInSeconds;
         for (int i = 0; i < prognosis.length; i++) {
@@ -91,6 +91,11 @@ public class PvPrognosis {
 
             timeInSeconds = partOffTheDay.getSeconds() + stepWidth;
             partOffTheDay.setSeconds(timeInSeconds);
+
+            if(sunRiseTime.getDate() < partOffTheDay.getDate()){
+                sunRiseTime = sunPosition.getSunRiseTime(partOffTheDay);
+                sunSetTime = sunPosition.getSunSetTime(partOffTheDay);
+            }
         }
     }
 
