@@ -92,7 +92,8 @@ public class PvPrognosis {
             timeInSeconds = partOffTheDay.getSeconds() + stepWidth;
             partOffTheDay.setSeconds(timeInSeconds);
 
-            if(partOffTheDay.getDate() != sunRiseTime.getDate()){
+            //TODO: Check if < or !=
+            if(sunRiseTime.getDate() < partOffTheDay.getDate()){
                 sunRiseTime = sunPosition.getSunRiseTime(partOffTheDay);
                 sunSetTime = sunPosition.getSunSetTime(partOffTheDay);
             }
