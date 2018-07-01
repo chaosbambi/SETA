@@ -14,6 +14,11 @@ public class HouseData {
 
     private WeatherStation weatherStaion;
 
+
+    public void setSmartMeter(SmartMeter smartMeter) {
+        this.smartMeter = smartMeter;
+    }
+
     public void setPvNominalPower(double pvNominalPower) {
         this.pvNominalPower = pvNominalPower;
     }
