@@ -1,9 +1,14 @@
 package com.hsowl.seta.ui;
 
-//import com.hsowl.seta.logic.PvPrognosis;
+import com.hsowl.seta.logic.PvPrognosis;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.Date;
 
 public class PvPrognosisTest {
-/*
+
     @Test
     public void testCalculatePvPrognosis(){
         double [] prog = new double[24];
@@ -50,5 +55,5 @@ public class PvPrognosisTest {
         pp.calculatePvPrognosis(prog,wfac,d);
 
         Assert.assertArrayEquals(expected, prog,5.0);
-    }*/
+    }
 }
