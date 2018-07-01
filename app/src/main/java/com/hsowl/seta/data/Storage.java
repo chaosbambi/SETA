@@ -5,11 +5,13 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Storage {
 
@@ -19,8 +21,11 @@ public class Storage {
 
     private final String filename = "houseData.json";
 
+    public Storage(Context context){
+        this.context = context;
+    }
+
     public void storeHouseData() {
-        //TODO check if file exists
         File file = new File(context.getFilesDir(), filename);
         FileOutputStream outputStream;
         Gson gson = new GsonBuilder().create();
@@ -34,13 +39,23 @@ public class Storage {
     }
 
     public void readHouseData(){
-        byte [] fileContent = null;
+        String fileContent;
         try {
             FileInputStream inputStream = context.openFileInput(filename);
-            fileContent = new byte[inputStream.available()];
-            inputStream.read(fileContent);
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String receiveString;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            while ( (receiveString = bufferedReader.readLine()) != null ) {
+                stringBuilder.append(receiveString);
+            }
+
+            inputStream.close();
+            fileContent = stringBuilder.toString();
+
             Gson gson = new GsonBuilder().create();
-            houseData = gson.fromJson(fileContent.toString(), HouseData.class);
+            houseData = gson.fromJson(fileContent, HouseData.class);
         } catch (FileNotFoundException e) {
             //TODO handle Exception
             //erste Eingabe von Daten des Users starten
@@ -50,5 +65,13 @@ public class Storage {
             e.printStackTrace();
         }
 
+    }
+
+    public HouseData getHouseData() {
+        return houseData;
+    }
+
+    public void setHouseData(HouseData houseData) {
+        this.houseData = houseData;
     }
 }

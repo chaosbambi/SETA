@@ -1,7 +1,9 @@
 package com.hsowl.seta.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.hsowl.seta.R;
 
 public class MainActivity extends AppCompatActivity {
 
