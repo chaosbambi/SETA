@@ -2,8 +2,10 @@ package com.hsowl.seta.logic;
 
 import com.hsowl.seta.data.Device;
 import com.hsowl.seta.data.HouseData;
+import com.hsowl.seta.data.NoWeatherStationException;
+import com.hsowl.seta.data.SmartMeterAuthenticationException;
 
-import java.util.ArrayList;
+
 import java.util.Map;
 
 public class EnergySuggestion {
@@ -22,7 +24,7 @@ public class EnergySuggestion {
         return deviceSuggestions;
     }
 
-    public TrafficLightColor [] getTrafficLightColors(TrafficLightColor curColor) throws Exception {
+    public TrafficLightColor [] getTrafficLightColors(TrafficLightColor curColor) throws NoWeatherStationException, SmartMeterAuthenticationException {
         //get current power consumption
         double activePowPlus = houseData.getActivePowPlus();
         // get current and future power production

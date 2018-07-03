@@ -45,7 +45,7 @@ public class HouseData {
         return weatherStation;
     }
 
-    public double getActivePowPlus() throws Exception{
+    public double getActivePowPlus() throws SmartMeterAuthenticationException{
         double activePowPlus;
         //check if user has smart meter
         if (smartMeter != null) {
@@ -53,7 +53,7 @@ public class HouseData {
             if(smartMeter.checkAuthentication()){
                 activePowPlus = smartMeter.requestData().getActivePowerPos();
             } else {
-                throw new Exception("Smart Meter Authentication failed");
+                throw new SmartMeterAuthenticationException();
             }
         } else {
                 //if the user has no smart meter, use the average power consumption instead
@@ -63,7 +63,7 @@ public class HouseData {
         return activePowPlus;
     }
 
-    public void getActivePowMinusPredict(double activePowMinusPredict[]) throws Exception {
+    public void getActivePowMinusPredict(double activePowMinusPredict[]) throws SmartMeterAuthenticationException, NoWeatherStationException {
         double activePowMinus = 1.0;
         //check if user has smart meter
         if (smartMeter != null) {
@@ -71,7 +71,7 @@ public class HouseData {
             if(smartMeter.checkAuthentication()){
                 activePowMinus = smartMeter.requestData().getActivePowerNeg();
             } else {
-                throw new Exception("Smart Meter Authentication failed");
+                throw new SmartMeterAuthenticationException();
             }
         }
 
@@ -79,7 +79,7 @@ public class HouseData {
 
 
         if(weatherStation == null){
-            throw new Exception("No Weather Station");
+            throw new NoWeatherStationException();
         } else{
             if(weatherStation.checkForUpdates()){
                 weatherStation.updateWeatherData();
