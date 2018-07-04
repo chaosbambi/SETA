@@ -48,7 +48,7 @@ public class HttpClient {
             con.connect();
 
             // Let's read the response
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             is = con.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String line;
@@ -62,7 +62,9 @@ public class HttpClient {
             Log.d("HttpClient_Exception", Log.getStackTraceString(t));
         } finally {
             try {
-                is.close();
+                if (is != null) {
+                    is.close();
+                }
             } catch (Throwable t) {
                 Log.d("HttpClient_Exception", Log.getStackTraceString(t));
             }

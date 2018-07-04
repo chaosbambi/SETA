@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.util.Date;
 
+@SuppressWarnings("deprecation")
 public class PvPrognosis {
     private SunPosition sunPosition;
     private double pvPeakPower;
@@ -40,6 +41,8 @@ public class PvPrognosis {
         double radiationIntensity;
 
         double factor;
+        //Usage of deprecated class Date is necessary for downward compatibility
+        //noinspection deprecation
         Date partOffTheDay = new Date(day.getYear(),day.getMonth(),day.getDate(),day.getHours(),day.getMinutes(),day.getSeconds());
         int stepWidth = 60*60*24/prognosis.length;
         int timeInSeconds;

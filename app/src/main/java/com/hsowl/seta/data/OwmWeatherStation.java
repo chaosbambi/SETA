@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hsowl.seta.data.weatherData.WeatherData;
+import com.hsowl.seta.logic.PvPrognosis;
 
 import java.util.TreeMap;
 
@@ -16,9 +17,6 @@ public class OwmWeatherStation extends WeatherStation{
     private String weatherApiKey;
 
     private final long weatherUpdateDowntime = 1800000;
-
-    @Deprecated
-    private final String baseCoordURL = "http://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}";
 
     private final String baseZipURL = "http://api.openweathermap.org/data/2.5/forecast?zip={zip},de";
 
@@ -38,6 +36,7 @@ public class OwmWeatherStation extends WeatherStation{
      * @param zip   A valid german zip code as a short
      * @return  True if the paramter zip code is valid and was set for the Object. Otherwise returns false.
      */
+    @Override
     public boolean setZip(int zip) {
         if (zip >= 1000 && zip <= 99999 ){
             this.zip = zip;
@@ -45,11 +44,6 @@ public class OwmWeatherStation extends WeatherStation{
         }
         return false;
     }
-
-    public TreeMap<Long, WeatherData> getWeatherHistory() {
-        return weatherHistory;
-    }
-
 
 
     /**
@@ -67,15 +61,9 @@ public class OwmWeatherStation extends WeatherStation{
         if (weatherHistory.size() == 0 ||
                 weatherHistory.lastKey() + weatherUpdateDowntime < System.currentTimeMillis()){
 
-            String response = null;
             String url = baseZipURL;
 
             url = url.replace("{zip}",zip+"");
-
-            /*
-            url = url.replace("{lat}", lat+"");
-            url = url.replace("{lon}", lon+"");
-            */
 
             url = url.concat("&APPID=" + weatherApiKey);
 
@@ -124,10 +112,24 @@ public class OwmWeatherStation extends WeatherStation{
     }
 
     /**
+     * Creates a new PvPrognosis object with the latitude and longitude values currently set in
+     * this object.
+     * @param pvPeakPower   the peak power that is supply by the pv modul
+     * @param azimuth       the azimuth of the pv modul
+     * @param slope         the slope of the pv modul
+     */
+    @Override
+    public void createPvPrognosis(double pvPeakPower, double azimuth, double slope) {
+        this.pvPrognosis = new PvPrognosis(pvPeakPower, lat,lon,azimuth,slope);
+    }
+
+
+    /**
      * This Method checks if the last WeatherData object from the API is not older than 30 minutes.
      * It does not evaluate whether the information from the API has changed in this timespan.
      * @return  true if an update is necessare, false otherwise
      */
+    @Override
     public boolean checkForUpdates(){
         //Check if no past WeatherData objects exist or the last one is outdated.
         return weatherHistory.size() == 0 ||
@@ -138,9 +140,9 @@ public class OwmWeatherStation extends WeatherStation{
      * This Method sends a request to the OpenWeatherMap API and saves the response into a new
      * WeaterData object which is added internally to the weatherHistory list.
      */
+    @Override
     public boolean updateWeatherData(){
         WeatherData wd = null;
-        String response = null;
         String url = baseZipURL;
 
         url = url.replace("{zip}",zip+"");

@@ -25,6 +25,10 @@ public class HouseData {
         this.annualPowerConsumption = annualPowerConsumption;
     }
 
+    public void setSmartMeter(SmartMeter smartMeter) {
+        this.smartMeter = smartMeter;
+    }
+
     public SmartMeter getSmartMeter() {
         return smartMeter;
     }
@@ -87,7 +91,7 @@ public class HouseData {
             weatherStation.getWeatherFactor(weatherFactor);
         }
 
-        PvPrognosis pvp = new PvPrognosis(pvNominalPower, weatherStation.getLat(), weatherStation.getLon(), weatherStation.getAzimuth(), weatherStation.getSlope());
+        PvPrognosis pvp = weatherStation.getPvPrognosis();
 
         pvp.calculatePvPrognosis(activePowMinusPredict,weatherFactor, new Date());
 

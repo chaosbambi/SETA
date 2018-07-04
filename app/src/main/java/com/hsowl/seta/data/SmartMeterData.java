@@ -1,5 +1,8 @@
 package com.hsowl.seta.data;
 
+/**
+ * This class supplies the attributes in Java which are filled by the SmartMeter Json-Requests
+ */
 public class SmartMeterData {
 
     private String serial;

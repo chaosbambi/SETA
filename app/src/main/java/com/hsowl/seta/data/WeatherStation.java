@@ -1,28 +1,16 @@
 package com.hsowl.seta.data;
 
+import com.hsowl.seta.logic.PvPrognosis;
+
 public abstract class WeatherStation {
 
     protected double lat;
 
     protected double lon;
 
-    protected double slope;
-
-    protected double azimuth;
-
     protected int zip;
 
-    public double getSlope() {
-        return slope;
-    }
-
-    public double getAzimuth() {
-        return azimuth;
-    }
-
-    public int getZip() {
-        return zip;
-    }
+    protected PvPrognosis pvPrognosis;
 
     public double getLat() {
         return lat;
@@ -32,9 +20,15 @@ public abstract class WeatherStation {
         return lon;
     }
 
+    public PvPrognosis getPvPrognosis() {return pvPrognosis; }
+
     public abstract void getWeatherFactor(double [] weatherFactor);
+
+    public abstract boolean setZip(int zip);
 
     public abstract boolean checkForUpdates();
 
     public abstract boolean updateWeatherData();
+
+    public abstract void createPvPrognosis(double pvPeakPower, double azimuth, double slope);
 }

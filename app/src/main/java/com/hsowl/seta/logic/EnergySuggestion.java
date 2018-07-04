@@ -5,23 +5,24 @@ import com.hsowl.seta.data.HouseData;
 import com.hsowl.seta.data.NoWeatherStationException;
 import com.hsowl.seta.data.SmartMeterAuthenticationException;
 
-
 import java.util.Map;
 
 public class EnergySuggestion {
 
-    private TrafficLightColor [] trafficLightColors;
-
     private HouseData houseData;
 
-    private final double yellow_max = 4000.0;
+    public EnergySuggestion(HouseData houseData) {
+        this.houseData = houseData;
+    }
 
-    private final double yellow_min = 200.0;
-
+    /**
+     * Not implemented yet.
+     * @return  null;
+     */
     public Map<Device,Suggestion> getDeviceSuggestions() {
         Map<Device,Suggestion> deviceSuggestions = null;
 
-        return deviceSuggestions;
+        return null;
     }
 
     public TrafficLightColor [] getTrafficLightColors(TrafficLightColor curColor) throws NoWeatherStationException, SmartMeterAuthenticationException {
@@ -32,11 +33,11 @@ public class EnergySuggestion {
         houseData.getActivePowMinusPredict(activePowMinusPredict);
 
         //create an array for traffic light colors in prediction length
-        trafficLightColors = new TrafficLightColor[activePowMinusPredict.length];
+        TrafficLightColor[] trafficLightColors = new TrafficLightColor[activePowMinusPredict.length];
 
         double power;
         //calculate each color in the array
-        for(int i = 0 ; i < trafficLightColors.length ; i++){
+        for(int i = 0; i < trafficLightColors.length ; i++){
             // calculate difference between consumption and production
             power = activePowPlus - activePowMinusPredict[i];
             //in the first iteration user old traffic light color to calculate next one
@@ -54,12 +55,17 @@ public class EnergySuggestion {
 
 
     private TrafficLightColor trafficLightState(TrafficLightColor curColor, double power){
+        //boundaries
+        double yellow_max = 4000.0;
+        double yellow_min = 200.0;
+
         //hysteresis for the given boundaries
         final double hyst = 200.0;
         //if the Color won't change within the if statements it will stay the current color
         TrafficLightColor nextColor = curColor;
         //case 1 : the boundary red to yellow is undercut by the hysteresis -> traffic light turns yellow
-        if(curColor == TrafficLightColor.Red && power - hyst < yellow_max ){
+
+        if(curColor == TrafficLightColor.Red && power - hyst < yellow_max){
             nextColor = TrafficLightColor.Yellow;
         //case 2 : the boundary green to yellow is exceeded by the hysteresis -> traffic light turns yellow
         } else if( curColor == TrafficLightColor.Green && power + hyst > yellow_min){
