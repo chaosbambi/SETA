@@ -173,6 +173,7 @@ public class OwmWeatherStation extends WeatherStation{
      * values will be taken from the last WeatherData object in the weatherHistory list.
      * @return true if the values were updated succesfully, false otherwise
      */
+    @Override
     public boolean updateCoordinates(){
         if (weatherHistory.size()>0){
             WeatherData wd = weatherHistory.lastEntry().getValue();

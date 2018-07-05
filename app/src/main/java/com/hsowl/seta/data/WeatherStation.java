@@ -30,5 +30,7 @@ public abstract class WeatherStation {
 
     public abstract boolean updateWeatherData();
 
+    public abstract boolean updateCoordinates();
+
     public abstract void createPvPrognosis(double pvPeakPower, double azimuth, double slope);
 }
