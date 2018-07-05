@@ -7,9 +7,13 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@color/colorText</item>
-        <item name="android:actionBarStyle">@style/MyActionBar</item>
+
         <item name="android:windowBackground">@color/colorBackground</item>
 
+    </style>
+
+    <style name="AppThemeMain" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
     </style>
 
     <style name="ToolbarPopupTheme" parent="android:Widget.Toolbar">
@@ -18,8 +22,7 @@
         <item name="android:background">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="MyActionBar"
-        parent="android:Widget.ActionBar">
+    <style name="MyActionBar" parent="android:Widget.ActionBar">
         <item name="android:icon">@drawable/seta_logo</item>
         <item name="logo">@drawable/seta_logo</item>
         <item name="android:background">@color/colorPrimary</item>

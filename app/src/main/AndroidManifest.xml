@@ -15,7 +15,7 @@
 
         <activity
             android:name=".ui.MainActivity"
-            android:theme="@style/AppTheme"
+            android:theme="@style/AppThemeMain"
             android:label="@string/labelMain"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
