@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -26,7 +25,6 @@ public class Storage {
     }
 
     public void storeHouseData() {
-        File file = new File(context.getFilesDir(), filename);
         FileOutputStream outputStream;
         Gson gson = new GsonBuilder().create();
         try {

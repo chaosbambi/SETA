@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.hsowl.seta.R;
 import com.hsowl.seta.data.HouseData;
+import com.hsowl.seta.data.Storage;
 import com.hsowl.seta.logic.EnergySuggestion;
 import com.hsowl.seta.logic.TrafficLightColor;
 
@@ -24,15 +25,13 @@ import java.util.Map;
 
 public class MainFragment extends Fragment {
 
-    //Storage storage;
+    Storage storage;
     HouseData houseDate;
     EnergySuggestion energySuggestion;
     List<TrafficLightColor> trafficLightColorsList;
     String[] trafficLightsForecastIntervalls;
     Map<ImageView, String> trafficLightsForecastData;
     LinearLayout llTrafficLightsForecastView;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,7 +82,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        //houseDate = Storage.getHouseData();
+        //houseDate = storage.getHouseData();
         //energySuggestion = new EnergySuggestion(houseDate);
         //trafficLightColorsList = energySuggestion.getTrafficLightColors();
 

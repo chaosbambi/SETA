@@ -1,21 +1,36 @@
 package com.hsowl.seta.data;
 
+import com.hsowl.seta.logic.PvPrognosis;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HouseData {
-
-    private double pvPeakPower;
-
-    private double annualPowerConsumption;
-
-    private WeatherStation weatherStaion;
 
     private SmartMeter smartMeter;
 
     private ArrayList<Device> devices;
 
-    public HouseData(){
-        this.devices = new ArrayList<>();
+    private double pvNominalPower;
+
+    private double annualPowerConsumption;
+
+    private WeatherStation weatherStation;
+
+    public void setPvNominalPower(double pvNominalPower) {
+        this.pvNominalPower = pvNominalPower;
+    }
+
+    public void setAnnualPowerConsumption(double annualPowerConsumption) {
+        this.annualPowerConsumption = annualPowerConsumption;
+    }
+
+    public void setSmartMeter(SmartMeter smartMeter) {
+        this.smartMeter = smartMeter;
+    }
+
+    public void setWeatherStation(WeatherStation weatherStation) {
+        this.weatherStation = weatherStation;
     }
 
     public SmartMeter getSmartMeter() {
@@ -26,24 +41,67 @@ public class HouseData {
         return devices;
     }
 
-    public double getPvPeakPower() {
-        return pvPeakPower;
+    public double getPvNominalPower() {
+        return pvNominalPower;
     }
 
     public double getAnnualPowerConsumption() {
         return annualPowerConsumption;
     }
 
-    public WeatherStation getWeatherStaion() {
-        return weatherStaion;
+    public WeatherStation getWeatherStation() {
+        return weatherStation;
     }
 
-    public void setPvPeakPower(double pvPeakPower) {
-        this.pvPeakPower = pvPeakPower;
+    public double getActivePowPlus() throws SmartMeterAuthenticationException{
+        double activePowPlus;
+        //check if user has smart meter
+        if (smartMeter != null) {
+            //try to get current active pow pos from smart meter
+            if(smartMeter.checkAuthentication()){
+                activePowPlus = smartMeter.requestData().getActivePowerPos();
+            } else {
+                throw new SmartMeterAuthenticationException();
+            }
+        } else {
+                //if the user has no smart meter, use the average power consumption instead
+                activePowPlus = annualPowerConsumption / 8760.0;
+            }
+
+        return activePowPlus;
     }
 
-    public void setAnnualPowerConsumption(double annualPowerConsumption) {
-        this.annualPowerConsumption = annualPowerConsumption;
-    }
+    public void getActivePowMinusPredict(double activePowMinusPredict[]) throws SmartMeterAuthenticationException, NoWeatherStationException {
+        double activePowMinus = 1.0;
+        //check if user has smart meter
+        if (smartMeter != null) {
+            //try to get current active pow pos from smart meter
+            if(smartMeter.checkAuthentication()){
+                activePowMinus = smartMeter.requestData().getActivePowerNeg();
+            } else {
+                throw new SmartMeterAuthenticationException();
+            }
+        }
 
+        double[] weatherFactor = new double[activePowMinusPredict.length];
+
+
+        if(weatherStation == null){
+            throw new NoWeatherStationException();
+        } else{
+            if(weatherStation.checkForUpdates()){
+                weatherStation.updateWeatherData();
+            }
+            weatherStation.getWeatherFactor(weatherFactor);
+        }
+
+        PvPrognosis pvp = weatherStation.getPvPrognosis();
+
+        pvp.calculatePvPrognosis(activePowMinusPredict,weatherFactor, new Date());
+
+        if(activePowMinus <=0 ){
+            activePowMinusPredict[0] = activePowMinus;
+        }
+
+    }
 }
