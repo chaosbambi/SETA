@@ -39,7 +39,7 @@ public class EnergySuggestion {
             for(int j = 0; j < Suggestion.values().length - 1; i++){
 
                 if(devices.get(i).getPowerConsumption() + lastForecast[j] < 0 ){
-                    suggestions[i] = Suggestion.One.getHoursByInt(j+1);
+                    suggestions[i] = Suggestion.getHoursByInt(j+1);
                     break;
                 }
                 if(j == Suggestion.values().length - 2 ){

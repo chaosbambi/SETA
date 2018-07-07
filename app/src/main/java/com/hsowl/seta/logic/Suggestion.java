@@ -9,7 +9,7 @@ enum Suggestion {
     Later;
 
 
-    public Suggestion getHoursByInt(int i){
+    public static Suggestion getHoursByInt(int i){
         Suggestion suggestion = Suggestion.Later;
         switch(i){
             case 1:
