@@ -57,12 +57,15 @@ public class HouseData {
         double activePowPlus;
         //check if user has smart meter
         if (smartMeter != null) {
+            //TODO: Check how to request the weatherData in the most efficient way.
             //try to get current active pow pos from smart meter
             if(smartMeter.checkAuthentication()){
                 activePowPlus = smartMeter.requestData().getActivePowerPos();
+                //TODO: If activePowPlus is 0 check for activePowMinus
             } else {
                 throw new SmartMeterAuthenticationException();
             }
+            //TODO: Add value from PvPrognosis to get the real power consumption
         } else {
                 //if the user has no smart meter, use the average power consumption instead
                 activePowPlus = annualPowerConsumption / 8760.0;
@@ -77,6 +80,7 @@ public class HouseData {
         if (smartMeter != null) {
             //try to get current active pow pos from smart meter
             if(smartMeter.checkAuthentication()){
+                //TODO: Handle NULL Pointer Exception
                 activePowMinus = smartMeter.requestData().getActivePowerNeg();
             } else {
                 throw new SmartMeterAuthenticationException();
@@ -99,6 +103,7 @@ public class HouseData {
 
         pvp.calculatePvPrognosis(activePowMinusPredict,weatherFactor, new Date());
 
+        //TODO: Check if replacing a value makes sense/if a request of the smart Meter Data makes sense
         if(activePowMinus <=0 ){
             activePowMinusPredict[0] = activePowMinus;
         }
