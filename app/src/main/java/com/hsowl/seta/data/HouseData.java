@@ -53,42 +53,45 @@ public class HouseData {
         return weatherStation;
     }
 
-    public double getActivePowPlus() throws SmartMeterAuthenticationException{
-        double activePowPlus;
+    public void getPowerConsumptionPrediction(double activePowPlusPredict[]) throws SmartMeterAuthenticationException, SmartMeterDataRetrievalException, NoWeatherStationException{
+        double activePow;
         //check if user has smart meter
         if (smartMeter != null) {
-            //TODO: Check how to request the weatherData in the most efficient way.
+
             //try to get current active pow pos from smart meter
             if(smartMeter.checkAuthentication()){
-                activePowPlus = smartMeter.requestData().getActivePowerPos();
-                //TODO: If activePowPlus is 0 check for activePowMinus
+                SmartMeterData smd = smartMeter.requestData();
+                if (smd == null) {
+                    throw new SmartMeterDataRetrievalException();
+                }
+
+                double consumption[] = new double[activePowPlusPredict.length];
+
+                getPowerProductionPrediction(consumption);
+
+                activePow = smd.getActivePowerPos();
+                if (activePow == 0){
+                    activePow = smd.getActivePowerNeg();
+                    activePow = Math.abs(activePow-consumption[0]);
+                }else {
+                    activePow = activePow + consumption[0];
+                }
             } else {
                 throw new SmartMeterAuthenticationException();
             }
-            //TODO: Add value from PvPrognosis to get the real power consumption
         } else {
                 //if the user has no smart meter, use the average power consumption instead
-                activePowPlus = annualPowerConsumption / 8760.0;
-            }
-
-        return activePowPlus;
-    }
-
-    public void getActivePowMinusPredict(double activePowMinusPredict[]) throws SmartMeterAuthenticationException, NoWeatherStationException {
-        double activePowMinus = 1.0;
-        //check if user has smart meter
-        if (smartMeter != null) {
-            //try to get current active pow pos from smart meter
-            if(smartMeter.checkAuthentication()){
-                //TODO: Handle NULL Pointer Exception
-                activePowMinus = smartMeter.requestData().getActivePowerNeg();
-            } else {
-                throw new SmartMeterAuthenticationException();
-            }
+                activePow = annualPowerConsumption / (365 * activePowPlusPredict.length);
         }
 
-        double[] weatherFactor = new double[activePowMinusPredict.length];
+        for (int i = 0 ; i < activePowPlusPredict.length;i++){
+            activePowPlusPredict[i] = activePow;
+        }
+    }
 
+    public void getPowerProductionPrediction(double activePowMinusPredict[]) throws NoWeatherStationException {
+
+        double[] weatherFactor = new double[activePowMinusPredict.length];
 
         if(weatherStation == null){
             throw new NoWeatherStationException();
@@ -102,11 +105,5 @@ public class HouseData {
         PvPrognosis pvp = weatherStation.getPvPrognosis();
 
         pvp.calculatePvPrognosis(activePowMinusPredict,weatherFactor, new Date());
-
-        //TODO: Check if replacing a value makes sense/if a request of the smart Meter Data makes sense
-        if(activePowMinus <=0 ){
-            activePowMinusPredict[0] = activePowMinus;
-        }
-
     }
 }

@@ -4,9 +4,9 @@ import com.hsowl.seta.data.Device;
 import com.hsowl.seta.data.HouseData;
 import com.hsowl.seta.data.NoWeatherStationException;
 import com.hsowl.seta.data.SmartMeterAuthenticationException;
+import com.hsowl.seta.data.SmartMeterDataRetrievalException;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class EnergySuggestion {
 
@@ -45,20 +45,19 @@ public class EnergySuggestion {
                 if(j == Suggestion.values().length - 2 ){
                     suggestions[i] = Suggestion.Later;
                 }
-
             }
-
         }
         return suggestions;
     }
 
-    public TrafficLightColor [] getTrafficLightColors(TrafficLightColor curColor) throws NoWeatherStationException, SmartMeterAuthenticationException {
+    public TrafficLightColor [] getTrafficLightColors(TrafficLightColor curColor) throws NoWeatherStationException, SmartMeterDataRetrievalException, SmartMeterAuthenticationException {
         //get current power consumption
-        double activePowPlus = houseData.getActivePowPlus();
+        double[] activePowPlusPredict = new double[24];
+        houseData.getPowerConsumptionPrediction(activePowPlusPredict);
         // get current and future power production
         double [] activePowMinusPredict = new double[24];
         lastForecast = new  double[activePowMinusPredict.length];
-        houseData.getActivePowMinusPredict(activePowMinusPredict);
+        houseData.getPowerProductionPrediction(activePowMinusPredict);
 
         //create an array for traffic light colors in prediction length
         TrafficLightColor[] trafficLightColors = new TrafficLightColor[activePowMinusPredict.length];
@@ -67,7 +66,7 @@ public class EnergySuggestion {
         //calculate each color in the array
         for(int i = 0; i < trafficLightColors.length ; i++){
             // calculate difference between consumption and production
-            lastForecast[i] = activePowPlus - activePowMinusPredict[i];
+            lastForecast[i] = activePowPlusPredict[i] - activePowMinusPredict[i];
             //in the first iteration user old traffic light color to calculate next one
             if(i == 0){
                 trafficLightColors[i] = trafficLightState(curColor, lastForecast[i]);
@@ -75,9 +74,7 @@ public class EnergySuggestion {
             } else{
                 trafficLightColors[i] = trafficLightState(trafficLightColors[i-1], lastForecast[i]);
             }
-
         }
-
         return trafficLightColors;
     }
 
@@ -110,6 +107,4 @@ public class EnergySuggestion {
         }
         return nextColor;
     }
-
-
 }

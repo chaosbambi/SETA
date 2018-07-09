@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.hsowl.seta.R;
 import com.hsowl.seta.data.HouseData;
+import com.hsowl.seta.data.OwmWeatherStation;
 import com.hsowl.seta.data.SmartMeter;
 import com.hsowl.seta.data.WeatherStation;
 
@@ -33,14 +34,14 @@ public class CustomSettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_custom_settings, container, false);
 
-        etAnnualPowerConsumption = (EditText)rootView.findViewById(R.id.etAnnualPowerConsumption);
-        etPVPeakPower = (EditText)rootView.findViewById(R.id.etPVPeakPower);
-        etIPAddress = (EditText)rootView.findViewById(R.id.etIPAddress);
-        etZIPCode = (EditText)rootView.findViewById(R.id.etZIPCode);
-        etAzimuth = (EditText)rootView.findViewById(R.id.etAzimuth);
-        etSlope = (EditText)rootView.findViewById(R.id.etSlope);
-        btnApplyCustomSettings1 = (Button)rootView.findViewById(R.id.btnApplyCustomSettings1);
-        btnApplyCustomSettings2 = (Button)rootView.findViewById(R.id.btnApplyCustomSettings2);
+        etAnnualPowerConsumption = rootView.findViewById(R.id.etAnnualPowerConsumption);
+        etPVPeakPower = rootView.findViewById(R.id.etPVPeakPower);
+        etIPAddress = rootView.findViewById(R.id.etIPAddress);
+        etZIPCode = rootView.findViewById(R.id.etZIPCode);
+        etAzimuth = rootView.findViewById(R.id.etAzimuth);
+        etSlope = rootView.findViewById(R.id.etSlope);
+        btnApplyCustomSettings1 = rootView.findViewById(R.id.btnApplyCustomSettings1);
+        btnApplyCustomSettings2 = rootView.findViewById(R.id.btnApplyCustomSettings2);
 
         houseData = new HouseData();
 
@@ -57,11 +58,11 @@ public class CustomSettingsFragment extends Fragment {
         btnApplyCustomSettings2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                weatherStation = new WeatherStation();
+                weatherStation = new OwmWeatherStation();
                 weatherStation.setZip(Integer.valueOf(etZIPCode.getText().toString()));
                 // TODO Funktion für setAzimuth
                 // TODO Funktion für setSlope
-                weatherStation.getCurrentWeatherData();
+                weatherStation.updateWeatherData();
                 // TODO Funktion für updateCoordinates
                 // TODO Funktion für addWeatherStation to HouseData
             }
