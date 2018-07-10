@@ -49,6 +49,10 @@ public class HouseData {
         this.smartMeter = smartMeter;
     }
 
+    public void setWeatherStation(WeatherStation weatherStation) {
+        this.weatherStation = weatherStation;
+    }
+
     public SmartMeter getSmartMeter() {
         return smartMeter;
     }
@@ -120,5 +124,4 @@ public class HouseData {
         }
 
     }
-
 }
