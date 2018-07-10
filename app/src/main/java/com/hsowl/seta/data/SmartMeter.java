@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class SmartMeter {
+
     private String host;
 /* The following attributes are unused until the login for smartmeters with password authetication is implemented
     private String login;
@@ -117,6 +118,10 @@ public class SmartMeter {
 
             return smd;
         }
+    }
+
+    public String getHost() {
+        return host;
     }
 
 }

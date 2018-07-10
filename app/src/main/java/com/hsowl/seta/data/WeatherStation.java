@@ -24,11 +24,17 @@ public abstract class WeatherStation {
 
     public abstract void getWeatherFactor(double [] weatherFactor);
 
+    public int getZip() {
+        return zip;
+    }
+
     public abstract boolean setZip(int zip);
 
     public abstract boolean checkForUpdates();
 
     public abstract boolean updateWeatherData();
+
+    public abstract boolean updateCoordinates();
 
     public abstract void createPvPrognosis(double pvPeakPower, double azimuth, double slope);
 }

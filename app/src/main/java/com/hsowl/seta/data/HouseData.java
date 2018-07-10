@@ -11,14 +11,34 @@ public class HouseData {
 
     private ArrayList<Device> devices;
 
-    private double pvNominalPower;
+    private double pvPeakPower;
+
+    private double azimuth;
+
+    private double slope;
 
     private double annualPowerConsumption;
 
     private WeatherStation weatherStation;
 
-    public void setPvNominalPower(double pvNominalPower) {
-        this.pvNominalPower = pvNominalPower;
+    public double getAzimuth() {
+        return azimuth;
+    }
+
+    public void setAzimuth(double azimuth) {
+        this.azimuth = azimuth;
+    }
+
+    public double getSlope() {
+        return slope;
+    }
+
+    public void setSlope(double slope) {
+        this.slope = slope;
+    }
+
+    public void setPvPeakPower(double pvPeakPower) {
+        this.pvPeakPower = pvPeakPower;
     }
 
     public void setAnnualPowerConsumption(double annualPowerConsumption) {
@@ -37,8 +57,8 @@ public class HouseData {
         return devices;
     }
 
-    public double getPvNominalPower() {
-        return pvNominalPower;
+    public double getPvPeakPower() {
+        return pvPeakPower;
     }
 
     public double getAnnualPowerConsumption() {

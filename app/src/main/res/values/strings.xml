@@ -1,14 +1,34 @@
 <resources>
     <string name="app_name">SeTA</string>
 
-    <string name="labelDevice">Devices</string>
+    <string name="labelDevice">Geräte</string>
     <string name="labelMain">SeTA</string>
-    <string name="labelCustomSettings">Settings</string>
-    <string name="labelAbout">About</string>
-    <string name="labelHelp">Help</string>
+    <string name="labelCustomSettings">Einstellungen</string>
+    <string name="labelAbout">Über</string>
+    <string name="labelHelp">Hilfe</string>
 
-    <string name="device_activity_menu_item">Devices</string>
-    <string name="about_activity_menu_item">About</string>
-    <string name="custom_settings_activity_menu_item">Settings</string>
+    <!-- MainFragment -->
+    <string name="recommendation">Empfehlung:</string>
+    <string name="recommendationGreen">Verbrauche jetzt deinen Energieüberschuss!</string>
+    <string name="recommendationYellow">Achte darauf nicht zu viel Energie zu verbrauchen!</string>
+    <string name="recommendationRed">Warte auf besseres Wetter! Zurzeit wird keine Energie produziert!</string>
+
+    <!-- CustomSettingsFragment -->
+    <string name="ip_address">IP-Adresse</string>
+    <string name="annual_power_consumption">Jährlicher Stromverbrauch</string>
+    <string name="zip_code">Postleitzahl</string>
+    <string name="pv_peak_power">Maximalleistung PV-Anlage</string>
+    <string name="azimuth">Azimut</string>
+    <string name="slope">Winkel</string>
+    <string name="btnApply">Bestätigen</string>
+    <string name="data_saved">Daten gespeichert!</string>
+    <string name="exception_no_houseData">Bitte geben Sie Daten ein!</string>
+
+    <!-- Menü -->
+    <string name="device_activity_menu_item">Geräte</string>
+    <string name="about_activity_menu_item">Über</string>
+    <string name="custom_settings_activity_menu_item">Einstellungen</string>
+
+    <string name="exception_first_login">Bitte geben Sie Ihre Daten ein!</string>
 
 </resources>

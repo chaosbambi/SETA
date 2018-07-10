@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.v4.widget.SwipeRefreshLayout
+    android:id="@+id/srlMainFragment"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.MainFragment">
-
-    <!--<include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar_main"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="83dp"/>-->
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,10 +19,10 @@
             android:layout_marginBottom="30dp" >
 
             <ImageView
+                android:id="@+id/ivCurrentTrafficLight"
                 android:layout_width="110dp"
                 android:layout_height="200dp"
-                android:layout_margin="20dp"
-                android:src="@drawable/traffic_light_green_v3" />
+                android:layout_margin="20dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,16 +32,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recommendation:"
-                    android:layout_margin="20dp"
+                    android:text="@string/recommendation"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
                     />
 
                 <TextView
+                    android:id="@+id/tvRecommendation"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="20dp"
-                    android:text="Use your energy! Right now!"
-                    android:textSize="25dp" />
+                    android:textSize="25sp" />
 
             </LinearLayout>
 
@@ -64,12 +60,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-
-
             </LinearLayout>
 
         </HorizontalScrollView>
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

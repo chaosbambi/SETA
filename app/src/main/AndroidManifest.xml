@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,24 +13,31 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.MainActivity"
-            android:theme="@style/AppThemeMain"
-            android:label="@string/labelMain"
+            android:name=".ui.SplashActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
+            android:label="@string/labelMain"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
-            android:name=".ui.DeviceActivity"
-            android:label="@string/labelDevice"
+            android:name=".ui.MainActivity"
             android:configChanges="orientation"
+            android:label="@string/labelMain"
             android:screenOrientation="portrait"
-            android:parentActivityName=".ui.MainActivity" >
+            android:theme="@style/AppThemeMain">
+        </activity>
+
+        <activity
+            android:name=".ui.DeviceActivity"
+            android:configChanges="orientation"
+            android:label="@string/labelDevice"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.hsowl.seta.ui.MainActivity" />
@@ -39,10 +45,10 @@
 
         <activity
             android:name=".ui.CustomSettingsActivity"
-            android:label="@string/labelCustomSettings"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".ui.MainActivity" >
+            android:label="@string/labelCustomSettings"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.hsowl.seta.ui.MainActivity" />
@@ -50,21 +56,21 @@
 
         <activity
             android:name=".ui.AboutActivity"
-            android:label="@string/labelAbout"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".ui.MainActivity" >
+            android:label="@string/labelAbout"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.hsowl.seta.ui.MainActivity" />
         </activity>
 
-
         <activity
             android:name=".ui.HelpActivity"
-            android:label="@string/labelHelp"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:label="@string/labelHelp"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

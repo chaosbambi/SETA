@@ -3,6 +3,7 @@ package com.hsowl.seta.ui;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.hsowl.seta.R;
 import com.hsowl.seta.data.HouseData;
 import com.hsowl.seta.data.Storage;
@@ -25,26 +28,35 @@ import java.util.Map;
 
 public class MainFragment extends Fragment {
 
+    LinearLayout llTrafficLightsForecastView;
+    ImageView ivCurrentTrafficLight;
+    TextView tvRecommendation;
+    SwipeRefreshLayout srlSwipeRefresh;
+
     Storage storage;
-    HouseData houseDate;
+    HouseData houseData;
     EnergySuggestion energySuggestion;
     List<TrafficLightColor> trafficLightColorsList;
     String[] trafficLightsForecastIntervalls;
     Map<ImageView, String> trafficLightsForecastData;
-    LinearLayout llTrafficLightsForecastView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
+        Intent data = this.getActivity().getIntent();
 
-        //this.storage.storeHouseData();
+        houseData = new Gson().fromJson(data.getStringExtra("houseData"), HouseData.class);
+
+        if(houseData == null){
+            Toast.makeText(getActivity(), R.string.exception_first_login, Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getActivity(), CustomSettingsActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
+
     }
 
     @Override
@@ -66,6 +78,7 @@ public class MainFragment extends Fragment {
                 return true;
             case R.id.custom_settings_activity_menu_item:
                 menuIntent = new Intent(getActivity(), CustomSettingsActivity.class);
+                menuIntent.putExtra("houseData", new Gson().toJson(houseData));
                 startActivity(menuIntent);
                 return true;
             case R.id.about_activity_menu_item:
@@ -82,31 +95,83 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        //houseDate = storage.getHouseData();
-        //energySuggestion = new EnergySuggestion(houseDate);
-        //trafficLightColorsList = energySuggestion.getTrafficLightColors();
-
+        // TODO just for testing, delete in further steps
         trafficLightColorsList = new ArrayList<>();
         trafficLightColorsList.add(TrafficLightColor.Red);
 
+        // Current traffic light image view and recommendation text view
+        ivCurrentTrafficLight = (ImageView)rootView.findViewById(R.id.ivCurrentTrafficLight);
+        tvRecommendation = (TextView)rootView.findViewById(R.id.tvRecommendation);
+        switch (trafficLightColorsList.get(0)){
+            case Green:
+                ivCurrentTrafficLight.setImageResource(R.drawable.traffic_light_green_v3);
+                tvRecommendation.setText(R.string.recommendationGreen);
+                break;
+            case Yellow:
+                ivCurrentTrafficLight.setImageResource(R.drawable.traffic_light_yellow_v3);
+                tvRecommendation.setText(R.string.recommendationYellow);
+                break;
+            case Red:
+                ivCurrentTrafficLight.setImageResource(R.drawable.traffic_light_red_v3);
+                tvRecommendation.setText(R.string.recommendationRed);
+                break;
+        }
+
+        // Build Forecast-Scrollbar
         trafficLightsForecastIntervalls = buildIntervallsForTrafficLightForecast(1, "h");
 
         createCustomTrafficLightForecastView(rootView, trafficLightsForecastIntervalls);
 
+        srlSwipeRefresh = (SwipeRefreshLayout)rootView.findViewById(R.id.srlMainFragment);
+        srlSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(getActivity(), "Refresh fragment!!!!!", Toast.LENGTH_LONG).show();
+            }
+        });
+
         return rootView;
     }
 
-    private String[] buildIntervallsForTrafficLightForecast(int intervall, String unit) {
-        String [] intervallStrings = new String[23];
+    @Override
+    public void onStart() {
+        super.onStart();
 
-        for(String item : intervallStrings) {
-            item = "+" + String.valueOf(intervall) + " min" + unit;
-            intervall += intervall;
-        }
-
-        return intervallStrings;
+        //energySuggestion = new EnergySuggestion(houseData);
+        //trafficLightColorsList = energySuggestion.getTrafficLightColors();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        //this.storage.setHouseData(houseData);
+        //this.storage.storeHouseData();
+    }
+
+    /**
+     * This method builds an array of strings that contain the intervall time of the forecast and the unit that is used.
+     * @param interval
+     * @param unit
+     * @return String[]
+     */
+    private String[] buildIntervallsForTrafficLightForecast(int interval, String unit) {
+        String [] intervalStrings = new String[23];
+
+        for(int i=0; i<intervalStrings.length; i++) {
+            intervalStrings[i] = "+" + String.valueOf(interval) + unit;
+            interval += interval;
+        }
+
+        return intervalStrings;
+    }
+
+    /**
+     * This method creates a view object that displays a linear layout filled with the traffic lights of the forecast and the forecast interval time.
+     * It is set into a HorizontalScrollView in the MainFragment
+     * @param rootView
+     * @param trafficLightsForecastIntervalls
+     */
     private void createCustomTrafficLightForecastView(View rootView, String[] trafficLightsForecastIntervalls) {
         llTrafficLightsForecastView = (LinearLayout) rootView.findViewById(R.id.trafficLightsForecast);
         LayoutInflater inflaterCustomView = LayoutInflater.from(getActivity());

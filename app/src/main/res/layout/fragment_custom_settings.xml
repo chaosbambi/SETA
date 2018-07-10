@@ -11,6 +11,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="25dp">
+
+            <EditText
+                android:id="@+id/etIPAddress"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:inputType="text"
+                android:hint="@string/ip_address"
+                android:textAlignment="textStart" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnApplyCustomSettings1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:text="@string/btnApply"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +49,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:inputType="number"
-                android:hint="Annual power consumption"
+                android:hint="@string/annual_power_consumption"
+                android:textAlignment="textStart" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="25dp">
+
+            <EditText
+                android:id="@+id/etZIPCode"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:inputType="number"
+                android:hint="@string/zip_code"
                 android:textAlignment="textStart" />
 
         </LinearLayout>
@@ -41,50 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:inputType="number"
-                android:hint="PV peak power"
-                android:textAlignment="textStart" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="25dp">
-
-            <EditText
-                android:id="@+id/etIPAddress"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:inputType="text"
-                android:hint="IP address smart meter"
-                android:textAlignment="textStart" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnApplyCustomSettings1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="Apply"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="25dp">
-
-            <EditText
-                android:id="@+id/etZIPCode"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:inputType="number"
-                android:hint="ZIP Code"
+                android:hint="@string/pv_peak_power"
                 android:textAlignment="textStart" />
 
         </LinearLayout>
@@ -108,7 +107,7 @@
                     android:id="@+id/etAzimuth"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:hint="Azimuth"
+                    android:hint="@string/azimuth"
                     android:inputType="number"
                     android:textAlignment="textStart" />
 
@@ -123,7 +122,7 @@
                     android:id="@+id/etSlope"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:hint="Slope"
+                    android:hint="@string/slope"
                     android:inputType="number"
                     android:textAlignment="textStart" />
 
@@ -154,7 +153,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
-            android:text="Apply"/>
+            android:text="@string/btnApply"/>
 
     </LinearLayout>
 
