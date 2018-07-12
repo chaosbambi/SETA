@@ -23,6 +23,12 @@
     <string name="btnApply">Bestätigen</string>
     <string name="data_saved">Daten gespeichert!</string>
     <string name="exception_no_houseData">Bitte geben Sie Daten ein!</string>
+    <string name="string_azimuth_slope_info">Der <b>Azimuth</b> beschreibt den Winkel zwischen Südrichtung und
+        PV-Ausrichtung in Grad. Um ihn zu messen muss lediglich ein Kompass parallel zur PV Anlage gehalten werden.
+        Nun nimmt man den angegeben Wert und berechnet die Differenz zur Südrichtung (180°).\n\n
+        Die <b>Neigung</b> entspricht dem Winkel zwischen Boden und Dachschräge, bzw. PV-Panel auf dem Dach.
+        Mit einer Wasserwaagen-App kann er leicht bestimmt werden. Einfach das Smartphone an die Innenseite des
+        Dachs anlegen und den Winkel ablesen.</string>
 
     <!-- Menü -->
     <string name="device_activity_menu_item">Geräte</string>

@@ -135,7 +135,7 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/btnAzimuthHelp"
+                    android:id="@+id/btnAzimuthSlopeHelp"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"

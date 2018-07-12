@@ -36,7 +36,6 @@
             android:name=".ui.DeviceActivity"
             android:configChanges="orientation"
             android:label="@string/labelDevice"
-            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -47,7 +46,6 @@
             android:name=".ui.CustomSettingsActivity"
             android:configChanges="orientation"
             android:label="@string/labelCustomSettings"
-            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -58,7 +56,6 @@
             android:name=".ui.AboutActivity"
             android:configChanges="orientation"
             android:label="@string/labelAbout"
-            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -16,9 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hsowl.seta.R;
 import com.hsowl.seta.data.HouseData;
 import com.hsowl.seta.data.Storage;
+import com.hsowl.seta.data.WeatherStation;
 import com.hsowl.seta.logic.EnergySuggestion;
 import com.hsowl.seta.logic.TrafficLightColor;
 
@@ -39,6 +41,8 @@ public class MainFragment extends Fragment {
     List<TrafficLightColor> trafficLightColorsList;
     String[] trafficLightsForecastIntervalls;
     Map<ImageView, String> trafficLightsForecastData;
+    GsonBuilder gsonBuilder;
+    Gson gson;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,12 +51,20 @@ public class MainFragment extends Fragment {
         setHasOptionsMenu(true);
 
         Intent data = this.getActivity().getIntent();
+        gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(WeatherStation.class, new InterfaceAdapter<WeatherStation>());
+        gson = gsonBuilder.create();
 
-        houseData = new Gson().fromJson(data.getStringExtra("houseData"), HouseData.class);
+        try {
+            houseData = gson.fromJson(data.getStringExtra("houseData"), HouseData.class);
+        }catch (Exception e){
+            Toast.makeText(getActivity(), "Error!", Toast.LENGTH_SHORT).show();
+        }
 
-        if(houseData == null){
+        if(houseData == null || houseData.getAnnualPowerConsumption() == 0.0 || houseData.getWeatherStation().getZip() == 0 || houseData.getPvPeakPower() == 0.0 || houseData.getAzimuth() == 0.0 || houseData.getSlope() == 0.0){
             Toast.makeText(getActivity(), R.string.exception_first_login, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getActivity(), CustomSettingsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             getActivity().finish();
         }
@@ -74,16 +86,24 @@ public class MainFragment extends Fragment {
         {
             case R.id.device_activity_menu_item:
                 menuIntent = new Intent(getActivity(), DeviceActivity.class);
+                menuIntent.putExtra("houseData", gson.toJson(houseData));
+                menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(menuIntent);
+                getActivity().finish();
                 return true;
             case R.id.custom_settings_activity_menu_item:
                 menuIntent = new Intent(getActivity(), CustomSettingsActivity.class);
-                menuIntent.putExtra("houseData", new Gson().toJson(houseData));
+                menuIntent.putExtra("houseData", gson.toJson(houseData));
+                menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(menuIntent);
+                getActivity().finish();
                 return true;
             case R.id.about_activity_menu_item:
                 menuIntent = new Intent(getActivity(), AboutActivity.class);
+                menuIntent.putExtra("houseData", gson.toJson(houseData));
+                menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(menuIntent);
+                getActivity().finish();
                 return true;
             default: break;
         }
@@ -147,6 +167,19 @@ public class MainFragment extends Fragment {
 
         //this.storage.setHouseData(houseData);
         //this.storage.storeHouseData();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        try{
+            this.storage.setHouseData(houseData);
+            this.storage.storeHouseData();
+        }catch (Exception e){
+            Toast.makeText(getActivity(), "Speichern nicht möglich", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     /**

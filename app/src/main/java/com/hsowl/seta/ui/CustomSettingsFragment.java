@@ -1,9 +1,12 @@
 package com.hsowl.seta.ui;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -11,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hsowl.seta.R;
 import com.hsowl.seta.data.HouseData;
 import com.hsowl.seta.data.OwmWeatherStation;
@@ -29,22 +33,33 @@ public class CustomSettingsFragment extends Fragment {
     EditText etSlope;
     Button btnApplyCustomSettings1;
     Button btnApplyCustomSettings2;
+    Button btnAzimuthSlopeHelp;
 
     Storage storage;
     HouseData houseData;
     WeatherStation weatherStation;
     SmartMeter smartMeter;
+    GsonBuilder gsonBuilder;
+    Gson gson;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setHasOptionsMenu(true);
+
+        getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(WeatherStation.class, new InterfaceAdapter<WeatherStation>());
+        gson = gsonBuilder.create();
+
         Intent intent = this.getActivity().getIntent();
 
         try{
-            houseData = new Gson().fromJson(intent.getStringExtra("houseData"), HouseData.class);
+            houseData = gson.fromJson(intent.getStringExtra("houseData"), HouseData.class);
         }catch (Exception e){
-            Toast.makeText(getActivity(), R.string.exception_first_login, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), R.string.exception_first_login, Toast.LENGTH_SHORT).show();
         }
 
         if(houseData == null){
@@ -65,6 +80,7 @@ public class CustomSettingsFragment extends Fragment {
         etSlope = (EditText)rootView.findViewById(R.id.etSlope);
         btnApplyCustomSettings1 = (Button)rootView.findViewById(R.id.btnApplyCustomSettings1);
         btnApplyCustomSettings2 = (Button)rootView.findViewById(R.id.btnApplyCustomSettings2);
+        btnAzimuthSlopeHelp = (Button)rootView.findViewById(R.id.btnAzimuthSlopeHelp) ;
 
         smartMeter = houseData.getSmartMeter();
         weatherStation = houseData.getWeatherStation();
@@ -72,7 +88,7 @@ public class CustomSettingsFragment extends Fragment {
         try {
             etIPAddress.setText(smartMeter.getHost());
             etAnnualPowerConsumption.setText(String.valueOf(houseData.getAnnualPowerConsumption()));
-            etZIPCode.setText(weatherStation.getZip());
+            etZIPCode.setText(String.valueOf(weatherStation.getZip()));
             etPVPeakPower.setText(String.valueOf(houseData.getPvPeakPower()));
             etAzimuth.setText(String.valueOf(houseData.getAzimuth()));
             etSlope.setText(String.valueOf(houseData.getSlope()));
@@ -88,6 +104,23 @@ public class CustomSettingsFragment extends Fragment {
             }
         });
 
+        btnAzimuthSlopeHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertAzimuth = new AlertDialog.Builder(getActivity());
+                alertAzimuth.setMessage(R.string.string_azimuth_slope_info)
+                        .setPositiveButton("Verstanden", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setTitle("Azimut & Neigungswinkel")
+                        .create();
+                alertAzimuth.show();
+            }
+        });
+
         btnApplyCustomSettings2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,13 +130,15 @@ public class CustomSettingsFragment extends Fragment {
                 weatherStation.updateWeatherData();
                 weatherStation.updateCoordinates();
                 weatherStation.createPvPrognosis(Double.valueOf(etPVPeakPower.getText().toString()), Double.valueOf(etAzimuth.getText().toString()), Double.valueOf(etSlope.getText().toString()));
+                houseData.setPvPeakPower(Double.valueOf(etPVPeakPower.getText().toString()));
                 houseData.setAzimuth(Double.valueOf(etAzimuth.getText().toString()));
                 houseData.setSlope(Double.valueOf(etSlope.getText().toString()));
 
                 houseData.setWeatherStation(weatherStation);
 
                 Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtra("houseData", new Gson().toJson(houseData));
+                intent.putExtra("houseData", gson.toJson(houseData));
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 getActivity().finish();
 
@@ -115,16 +150,39 @@ public class CustomSettingsFragment extends Fragment {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+                Toast.makeText(getActivity(),"Back button clicked", Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("houseData", gson.toJson(houseData));
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                getActivity().finish();
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
 
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.putExtra("houseData", gson.toJson(houseData));
+        startActivity(intent);
+        getActivity().finish();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
 
-        //this.storage.setHouseData(houseData);
-        //this.storage.storeHouseData();
+        this.storage.setHouseData(houseData);
+        this.storage.storeHouseData();
     }
 }
