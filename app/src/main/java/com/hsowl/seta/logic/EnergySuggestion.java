@@ -18,6 +18,11 @@ public class EnergySuggestion {
         this.houseData = houseData;
     }
 
+    public EnergySuggestion(HouseData houseData, double[] lastForecast){
+        this.houseData = houseData;
+        this.lastForecast = lastForecast;
+    }
+
     /**
      * Not implemented yet.
      * @return  null;
@@ -34,12 +39,12 @@ public class EnergySuggestion {
             throw new Exception("No Data available");
         }
 
-        for(int i = 0; i < suggestions.length; i++){
+        for(int i = 0; i < devices.size(); i++){
 
-            for(int j = 0; j < Suggestion.values().length - 1; i++){
+            for(int j = 0; j < Suggestion.values().length - 1; j++){
 
                 if(devices.get(i).getPowerConsumption() + lastForecast[j] < 0 ){
-                    suggestions[i] = Suggestion.getHoursByInt(j+1);
+                    suggestions[i] = Suggestion.getHoursByInt(j);
                     break;
                 }
                 if(j == Suggestion.values().length - 2 ){

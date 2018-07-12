@@ -1,7 +1,7 @@
 package com.hsowl.seta.logic;
 
 enum Suggestion {
-
+    Now,
     One,
     Two,
     Three,
@@ -12,6 +12,9 @@ enum Suggestion {
     public static Suggestion getHoursByInt(int i){
         Suggestion suggestion = Suggestion.Later;
         switch(i){
+            case 0:
+                suggestion = Suggestion.Now;
+                break;
             case 1:
                 suggestion = Suggestion.One;
                 break;
