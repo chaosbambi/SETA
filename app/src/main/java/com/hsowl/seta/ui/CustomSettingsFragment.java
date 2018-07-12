@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -95,37 +96,56 @@ public class CustomSettingsFragment extends Fragment {
             }else{
                 etIPAddress.setText(smartMeter.getHost());
             }
+        }catch (Exception e){
+            Log.d("Settings_Activity", e.getMessage().toString());
+        }
 
+        try{
             if (houseData.getAnnualPowerConsumption() == 0.0){
                 etAnnualPowerConsumption.setText("");
             }else{
                 etAnnualPowerConsumption.setText(String.valueOf(houseData.getAnnualPowerConsumption()));
             }
+        }catch (Exception e){
+            Log.d("Settings_Activity", e.getMessage().toString());
+        }
 
-           if (weatherStation.getZip() == 0){
-               etZIPCode.setText("");
-           }else{
-               etZIPCode.setText(String.valueOf(weatherStation.getZip()));
-           }
+        try{
+            if (weatherStation.getZip() == 0){
+                etZIPCode.setText("");
+            }else{
+                etZIPCode.setText(String.valueOf(weatherStation.getZip()));
+            }
+        }catch (Exception e){
+            Log.d("Settings_Activity", e.getMessage().toString());
+        }
 
-           if (houseData.getPvPeakPower() == 0.0){
-               etPVPeakPower.setText("");
-           } else {
-               etPVPeakPower.setText(String.valueOf(houseData.getPvPeakPower()));
-           }
+        try{
+            if (houseData.getPvPeakPower() == 0.0){
+                etPVPeakPower.setText("");
+            } else {
+                etPVPeakPower.setText(String.valueOf(houseData.getPvPeakPower()));
+            }
+        }catch (Exception e){
+            Log.d("Settings_Activity", e.getMessage().toString());
+        }
 
-           if (houseData.getAzimuth() == 0.0){
-               etAzimuth.setText("");
-           }else{
-               etAzimuth.setText(String.valueOf(houseData.getAzimuth()));
-           }
+        try{
+            if (houseData.getAzimuth() == 0.0){
+                etAzimuth.setText("");
+            }else{
+                etAzimuth.setText(String.valueOf(houseData.getAzimuth()));
+            }
+        }catch (Exception e){
+            Log.d("Settings_Activity", e.getMessage().toString());
+        }
 
-           if(houseData.getSlope() == 0.0){
-               etSlope.setText("");
-           }else{
-               etSlope.setText(String.valueOf(houseData.getSlope()));
-           }
-
+        try{
+            if(houseData.getSlope() == 0.0){
+                etSlope.setText("");
+            }else{
+                etSlope.setText(String.valueOf(houseData.getSlope()));
+            }
         }catch (Exception e){
             Log.d("Settings_Activity", e.getMessage().toString());
         }
@@ -160,7 +180,17 @@ public class CustomSettingsFragment extends Fragment {
             public void onClick(View view) {
                 houseData.setAnnualPowerConsumption(Double.valueOf(etAnnualPowerConsumption.getText().toString()));
                 weatherStation = new OwmWeatherStation();
-                weatherStation.setZip(Integer.valueOf(etZIPCode.getText().toString()));
+
+                boolean correctZip;
+
+                correctZip = weatherStation.setZip(Integer.valueOf(etZIPCode.getText().toString()));
+
+                if(correctZip == false){
+                    Toast.makeText(getActivity(), "Bitte richtige Postleitzahl eingeben!", Toast.LENGTH_SHORT).show();
+                    etZIPCode.setTextColor(Color.RED);
+                    return;
+                }
+
                 weatherStation.updateWeatherData();
                 weatherStation.updateCoordinates();
                 weatherStation.createPvPrognosis(Double.valueOf(etPVPeakPower.getText().toString()), Double.valueOf(etAzimuth.getText().toString()), Double.valueOf(etSlope.getText().toString()));
