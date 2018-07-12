@@ -48,7 +48,7 @@
                 android:id="@+id/etAnnualPowerConsumption"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:hint="@string/annual_power_consumption"
                 android:textAlignment="textStart" />
 
@@ -82,7 +82,7 @@
                 android:id="@+id/etPVPeakPower"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:hint="@string/pv_peak_power"
                 android:textAlignment="textStart" />
 
@@ -108,7 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:hint="@string/azimuth"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textAlignment="textStart" />
 
             </LinearLayout>
@@ -123,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:hint="@string/slope"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textAlignment="textStart" />
 
             </LinearLayout>

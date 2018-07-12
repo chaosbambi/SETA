@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -88,14 +89,45 @@ public class CustomSettingsFragment extends Fragment {
         weatherStation = houseData.getWeatherStation();
 
         try {
-            etIPAddress.setText(smartMeter.getHost());
-            etAnnualPowerConsumption.setText(String.valueOf(houseData.getAnnualPowerConsumption()));
-            etZIPCode.setText(String.valueOf(weatherStation.getZip()));
-            etPVPeakPower.setText(String.valueOf(houseData.getPvPeakPower()));
-            etAzimuth.setText(String.valueOf(houseData.getAzimuth()));
-            etSlope.setText(String.valueOf(houseData.getSlope()));
+            if (smartMeter == null)
+            {
+                etIPAddress.setText("");
+            }else{
+                etIPAddress.setText(smartMeter.getHost());
+            }
+
+            if (houseData.getAnnualPowerConsumption() == 0.0){
+                etAnnualPowerConsumption.setText("");
+            }else{
+                etAnnualPowerConsumption.setText(String.valueOf(houseData.getAnnualPowerConsumption()));
+            }
+
+           if (weatherStation.getZip() == 0){
+               etZIPCode.setText("");
+           }else{
+               etZIPCode.setText(String.valueOf(weatherStation.getZip()));
+           }
+
+           if (houseData.getPvPeakPower() == 0.0){
+               etPVPeakPower.setText("");
+           } else {
+               etPVPeakPower.setText(String.valueOf(houseData.getPvPeakPower()));
+           }
+
+           if (houseData.getAzimuth() == 0.0){
+               etAzimuth.setText("");
+           }else{
+               etAzimuth.setText(String.valueOf(houseData.getAzimuth()));
+           }
+
+           if(houseData.getSlope() == 0.0){
+               etSlope.setText("");
+           }else{
+               etSlope.setText(String.valueOf(houseData.getSlope()));
+           }
+
         }catch (Exception e){
-            Toast.makeText(getActivity(), R.string.exception_no_houseData, Toast.LENGTH_SHORT).show();
+            Log.d("Settings_Activity", e.getMessage().toString());
         }
 
         btnApplyCustomSettings1.setOnClickListener(new View.OnClickListener() {
