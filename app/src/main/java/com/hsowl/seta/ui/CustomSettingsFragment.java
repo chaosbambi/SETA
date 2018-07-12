@@ -176,6 +176,7 @@ public class CustomSettingsFragment extends Fragment {
 
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.putExtra("houseData", gson.toJson(houseData));
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         getActivity().finish();
     }
