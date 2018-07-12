@@ -4,12 +4,15 @@ import com.hsowl.seta.data.Device;
 import com.hsowl.seta.data.HouseData;
 import com.hsowl.seta.data.NoWeatherStationException;
 import com.hsowl.seta.data.SmartMeterAuthenticationException;
+import com.hsowl.seta.data.SmartMeterDataRetrievalException;
 
-import java.util.Map;
+import java.util.ArrayList;
 
 public class EnergySuggestion {
 
     private HouseData houseData;
+
+    private double [] lastForecast;
 
     public EnergySuggestion(HouseData houseData) {
         this.houseData = houseData;
@@ -19,18 +22,42 @@ public class EnergySuggestion {
      * Not implemented yet.
      * @return  null;
      */
-    public Map<Device,Suggestion> getDeviceSuggestions() {
-        Map<Device,Suggestion> deviceSuggestions = null;
+    public Suggestion[] getDeviceSuggestions() throws Exception{
+        ArrayList<Device> devices = houseData.getDevices();
+        Suggestion [] suggestions = new Suggestion[devices.size()];
 
-        return null;
+        if(devices.size() == 0){
+            throw new Exception("No Devices");
+        }
+
+        if(lastForecast == null){
+            throw new Exception("No Data available");
+        }
+
+        for(int i = 0; i < suggestions.length; i++){
+
+            for(int j = 0; j < Suggestion.values().length - 1; i++){
+
+                if(devices.get(i).getPowerConsumption() + lastForecast[j] < 0 ){
+                    suggestions[i] = Suggestion.getHoursByInt(j+1);
+                    break;
+                }
+                if(j == Suggestion.values().length - 2 ){
+                    suggestions[i] = Suggestion.Later;
+                }
+            }
+        }
+        return suggestions;
     }
 
-    public TrafficLightColor [] getTrafficLightColors(TrafficLightColor curColor) throws NoWeatherStationException, SmartMeterAuthenticationException {
+    public TrafficLightColor [] getTrafficLightColors(TrafficLightColor curColor) throws NoWeatherStationException, SmartMeterDataRetrievalException, SmartMeterAuthenticationException {
         //get current power consumption
-        double activePowPlus = houseData.getActivePowPlus();
+        double[] activePowPlusPredict = new double[24];
+        houseData.getPowerConsumptionPrediction(activePowPlusPredict);
         // get current and future power production
         double [] activePowMinusPredict = new double[24];
-        houseData.getActivePowMinusPredict(activePowMinusPredict);
+        lastForecast = new  double[activePowMinusPredict.length];
+        houseData.getPowerProductionPrediction(activePowMinusPredict);
 
         //create an array for traffic light colors in prediction length
         TrafficLightColor[] trafficLightColors = new TrafficLightColor[activePowMinusPredict.length];
@@ -39,17 +66,15 @@ public class EnergySuggestion {
         //calculate each color in the array
         for(int i = 0; i < trafficLightColors.length ; i++){
             // calculate difference between consumption and production
-            power = activePowPlus - activePowMinusPredict[i];
+            lastForecast[i] = activePowPlusPredict[i] - activePowMinusPredict[i];
             //in the first iteration user old traffic light color to calculate next one
             if(i == 0){
-                trafficLightColors[i] = trafficLightState(curColor,power);
+                trafficLightColors[i] = trafficLightState(curColor, lastForecast[i]);
             //for every other iteration use previous traffic light color
             } else{
-                trafficLightColors[i] = trafficLightState(trafficLightColors[i-1],power);
+                trafficLightColors[i] = trafficLightState(trafficLightColors[i-1], lastForecast[i]);
             }
-
         }
-
         return trafficLightColors;
     }
 
@@ -82,6 +107,4 @@ public class EnergySuggestion {
         }
         return nextColor;
     }
-
-
 }
