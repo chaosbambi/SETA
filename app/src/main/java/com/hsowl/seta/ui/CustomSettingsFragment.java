@@ -50,6 +50,8 @@ public class CustomSettingsFragment extends Fragment {
 
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 
+        storage = new Storage(getActivity());
+
         gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(WeatherStation.class, new InterfaceAdapter<WeatherStation>());
         gson = gsonBuilder.create();
@@ -182,7 +184,12 @@ public class CustomSettingsFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-        this.storage.setHouseData(houseData);
-        this.storage.storeHouseData();
+        try{
+            this.storage.setHouseData(houseData);
+            this.storage.storeHouseData();
+        }catch (Exception e){
+            Toast.makeText(getActivity(), "Speichern fehlgeschlagen!", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

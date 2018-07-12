@@ -50,6 +50,8 @@ public class MainFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
+        storage = new Storage(getActivity());
+
         Intent data = this.getActivity().getIntent();
         gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(WeatherStation.class, new InterfaceAdapter<WeatherStation>());
