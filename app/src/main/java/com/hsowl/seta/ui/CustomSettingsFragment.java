@@ -84,7 +84,7 @@ public class CustomSettingsFragment extends Fragment {
         etSlope = (EditText)rootView.findViewById(R.id.etSlope);
         btnApplyCustomSettings1 = (Button)rootView.findViewById(R.id.btnApplyCustomSettings1);
         btnApplyCustomSettings2 = (Button)rootView.findViewById(R.id.btnApplyCustomSettings2);
-        btnAzimuthSlopeHelp = (Button)rootView.findViewById(R.id.btnAzimuthSlopeHelp) ;
+        btnAzimuthSlopeHelp = (Button)rootView.findViewById(R.id.btnAzimuthSlopeHelp);
 
         smartMeter = houseData.getSmartMeter();
         weatherStation = houseData.getWeatherStation();
