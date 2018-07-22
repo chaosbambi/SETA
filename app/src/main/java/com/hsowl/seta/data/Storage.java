@@ -26,7 +26,9 @@ public class Storage {
 
     public void storeHouseData() {
         FileOutputStream outputStream;
-        Gson gson = new GsonBuilder().create();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(WeatherStation.class, new InterfaceAdapter<WeatherStation>());
+        Gson gson = gsonBuilder.create();
         try {
             outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
             outputStream.write(gson.toJson(houseData).getBytes());
@@ -52,7 +54,9 @@ public class Storage {
             inputStream.close();
             fileContent = stringBuilder.toString();
 
-            Gson gson = new GsonBuilder().create();
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.registerTypeAdapter(WeatherStation.class, new InterfaceAdapter<WeatherStation>());
+            Gson gson =gsonBuilder.create();
             houseData = gson.fromJson(fileContent, HouseData.class);
         } catch (FileNotFoundException e) {
             //TODO handle Exception

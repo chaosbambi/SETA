@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">SeTA</string>
-
     <string name="labelDevice">Geräte</string>
     <string name="labelMain">SeTA</string>
     <string name="labelCustomSettings">Einstellungen</string>
@@ -11,7 +10,9 @@
     <string name="recommendation">Empfehlung:</string>
     <string name="recommendationGreen">Verbrauche jetzt deinen Energieüberschuss!</string>
     <string name="recommendationYellow">Achte darauf nicht zu viel Energie zu verbrauchen!</string>
-    <string name="recommendationRed">Warte auf besseres Wetter! Zurzeit wird keine Energie produziert!</string>
+    <string name="recommendationRed">Warte auf besseres Wetter! Zurzeit wird keine Energie
+        produziert!</string>
+    <string name="exception_error_store_data">Daten konnten nicht gespeichert werden!</string>
 
     <!-- CustomSettingsFragment -->
     <string name="ip_address">IP-Adresse</string>
@@ -22,13 +23,24 @@
     <string name="slope">Winkel</string>
     <string name="btnApply">Bestätigen</string>
     <string name="data_saved">Daten gespeichert!</string>
+    <string name="exception_class_cast">Daten speichern fehlgeschlagen!</string>
     <string name="exception_no_houseData">Bitte geben Sie Daten ein!</string>
-    <string name="string_azimuth_slope_info">Der <b>Azimuth</b> beschreibt den Winkel zwischen Südrichtung und
-        PV-Ausrichtung in Grad. Um ihn zu messen, muss lediglich ein Kompass parallel zur PV Anlage gehalten werden.
-        Nun nimmt man den angegeben Wert und berechnet die Differenz zur Südrichtung (180°).\n\n
-        Die <b>Neigung</b> entspricht dem Winkel zwischen Boden und Dachschräge, bzw. PV-Panel auf dem Dach.
-        Mit einer Wasserwaagen-App kann er leicht bestimmt werden. Einfach das Smartphone an die Innenseite des
-        Dachs anlegen und den Winkel ablesen.</string>
+    <string name="string_azimuth_slope_info">Der <b>Azimut</b> beschreibt den Winkel zwischen
+        Südrichtung und PV-Ausrichtung in Grad. Um ihn zu messen, muss lediglich ein Kompass
+        parallel zur PV Anlage gehalten werden. Nun nimmt man den angegeben Wert und berechnet die
+        Differenz zur Südrichtung (180°).\n\nDie <b>Neigung</b> entspricht dem Winkel zwischen Boden
+        und Dachschräge, bzw. PV-Panel auf dem Dach. Mit einer Wasserwaagen-App kann er leicht
+        bestimmt werden. Einfach das Smartphone an die Innenseite des Dachs anlegen und den Winkel
+        ablesen.</string>
+
+    <!-- AboutFragment -->
+    <string name="str_powered_by">powered by</string>
+    <string name="str_version">Version 2.0</string>
+
+    <!-- ErrorFragment -->
+    <string name="btnError">Aktualisieren</string>
+    <string name="dialog_text">Die Verbindung ist unterbrochen!</string>
+    <string name="btnDialogError">Verstanden</string>
 
     <!-- Menü -->
     <string name="device_activity_menu_item">Geräte</string>
@@ -36,5 +48,7 @@
     <string name="custom_settings_activity_menu_item">Einstellungen</string>
 
     <string name="exception_first_login">Bitte geben Sie Ihre Daten ein!</string>
+    <string name="action_settings">Einstellungen</string>
+
 
 </resources>

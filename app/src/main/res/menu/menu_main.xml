@@ -1,21 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="de.androidnewcomer.seta_v2.ui.MainActivity">
     <item
-        android:id="@+id/device_activity_menu_item"
-        android:title="@string/device_activity_menu_item"
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
         app:showAsAction="never" />
-
-    <item
-        android:id="@+id/custom_settings_activity_menu_item"
-        android:title="@string/custom_settings_activity_menu_item"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/about_activity_menu_item"
-        android:title="@string/about_activity_menu_item"
-        app:showAsAction="never" />
-
 </menu>

@@ -1,38 +1,23 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Material" >
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColor">@color/colorText</item>
-
-        <item name="android:windowBackground">@color/colorBackground</item>
-
     </style>
 
-    <style name="AppThemeMain" parent="AppTheme">
-        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    <style name="AppTheme.Splash" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
-    <style name="ToolbarPopupTheme" parent="android:Widget.Toolbar">
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:background">@color/colorPrimaryDark</item>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="MyActionBar" parent="android:Widget.ActionBar">
-        <item name="android:icon">@drawable/seta_logo</item>
-        <item name="logo">@drawable/seta_logo</item>
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="displayOptions">useLogo|showHome|showTitle</item>
-    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-   <style name="AppTheme.SplashScreen" parent="AppTheme">
-       <item name="android:windowBackground">@drawable/splash</item>
-       <item name="android:windowTranslucentStatus">true</item>
-       <item name="android:windowTranslucentNavigation">true</item>
-   </style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

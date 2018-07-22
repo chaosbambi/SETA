@@ -32,7 +32,7 @@ public class SmartMeter {
     /**
      * This method delegates a task to send an http request to the host address to check whether the
      * user is authenticated.
-     * @return  true if the JSON paramter in the response equals true. Otherwise returns false.
+     * @return  true if the JSON parameter in the response equals true. Otherwise returns false.
      */
     public boolean checkAuthentication(){
         SmartMeterData smartMeterData = null;
@@ -109,7 +109,9 @@ public class SmartMeter {
 
             //Parse the JSON response in a class of the WheaterData type
             try {
-                Gson gson = new GsonBuilder().create();
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.registerTypeAdapter(WeatherStation.class, new InterfaceAdapter<WeatherStation>());
+                Gson gson = gsonBuilder.create();
 
                 smd = gson.fromJson(data, SmartMeterData.class);
             }catch (Exception e){

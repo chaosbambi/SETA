@@ -1,4 +1,4 @@
-package com.hsowl.seta.ui;
+package com.hsowl.seta.data;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
