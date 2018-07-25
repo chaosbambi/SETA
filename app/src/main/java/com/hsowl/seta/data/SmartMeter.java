@@ -107,6 +107,10 @@ public class SmartMeter {
                 data = ((httpClient.getData()));
             }
 
+            //Refactor attributes in meaningful names
+            data = data.replace("1-0:1.4.0*255","activePowerPos");
+            data = data.replace("1-0:2.4.0*255", "activePowerNeg");
+
             //Parse the JSON response in a class of the WheaterData type
             try {
                 GsonBuilder gsonBuilder = new GsonBuilder();
