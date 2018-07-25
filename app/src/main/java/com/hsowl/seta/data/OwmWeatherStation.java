@@ -99,10 +99,10 @@ public class OwmWeatherStation extends WeatherStation{
     @Override
     public void getWeatherFactor(double[] weatherFactor) {
         WeatherData wd = weatherHistory.lastEntry().getValue();
-        int remainder = weatherFactor.length % 8;
+        int remainder = weatherFactor.length % 8; // 8 is the number of different weatherforecasts per day
         for(int i = 0; i < 8 ; i++) {
             for (int j = 0; j < weatherFactor.length / 8; j++) {
-                weatherFactor[i * 8 + j] = wd.getList().get(i).getClouds().getAll() / 100.0;
+                weatherFactor[i * weatherFactor.length / 8 + j] = wd.getList().get(i).getClouds().getAll() / 100.0;
             }
         }
         //fill remaining array fields with last forecast
