@@ -51,16 +51,24 @@ public class HomeFragment extends Fragment {
 
         energySuggestion = new EnergySuggestion(((MainActivity)mainActivity).houseData);
         try {
-            trafficLightColorsList = energySuggestion.getTrafficLightColors(TrafficLightColor.Red);
+            trafficLightColorsList = energySuggestion.getTrafficLightColors(TrafficLightColor.Yellow);
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
+            ErrorFragment errorFragment = new ErrorFragment();
 
+            FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, errorFragment, "ErrorFragment");
+
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: Starting");
+        
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         // TODO just for testing, delete in further steps
@@ -71,6 +79,7 @@ public class HomeFragment extends Fragment {
         ivCurrentTrafficLight = (ImageView) view.findViewById(R.id.ivCurrentTrafficLight);
         tvRecommendation = (TextView) view.findViewById(R.id.tvRecommendation);
 
+        // TODO check if needed
         if (trafficLightColorsList == null)
         {
             ErrorFragment errorFragment = new ErrorFragment();
@@ -112,6 +121,7 @@ public class HomeFragment extends Fragment {
 
         Log.d(TAG, "onResume: starting");
 
+        // TODO check if needed
         /*if (trafficLightColorsList == null)
         {
             ErrorFragment errorFragment = new ErrorFragment();
@@ -132,10 +142,11 @@ public class HomeFragment extends Fragment {
      */
     private String[] buildIntervallsForTrafficLightForecast(int interval, String unit) {
         String [] intervalStrings = new String[23];
+        int intervalTarget = interval;
 
         for(int i=0; i<intervalStrings.length; i++) {
-            intervalStrings[i] = "+" + String.valueOf(interval) + unit;
-            interval += interval;
+            intervalStrings[i] = "+" + String.valueOf(intervalTarget) + unit;
+            intervalTarget += interval;
         }
 
         return intervalStrings;
@@ -150,7 +161,7 @@ public class HomeFragment extends Fragment {
     private void createCustomTrafficLightForecastView(View rootView, String[] trafficLightsForecastIntervalls) {
         llTrafficLightsForecastView = (LinearLayout) rootView.findViewById(R.id.trafficLightsForecast);
         LayoutInflater inflaterCustomView = LayoutInflater.from(getActivity());
-        for(int i=0; i<trafficLightColorsList.length; i++){
+        for(int i=0; i<trafficLightColorsList.length-1; i++){
             View view = inflaterCustomView.inflate(R.layout.traffic_light_item, llTrafficLightsForecastView, false);
 
             switch (trafficLightColorsList[i]) {

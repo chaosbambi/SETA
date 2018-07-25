@@ -174,8 +174,14 @@ public class CustomSettingsFragment extends Fragment {
         btnApplyCustomSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                smartMeter = new SmartMeter(etIPAddress.getText().toString());
-                houseData.setSmartMeter(smartMeter);
+
+                if (!etIPAddress.getText().toString().isEmpty()){
+                    smartMeter = new SmartMeter(etIPAddress.getText().toString());
+                    houseData.setSmartMeter(smartMeter);
+                }else{
+                    smartMeter = null;
+                    houseData.setSmartMeter(smartMeter);
+                }
 
                 // Prove and set annual power consumption
                 if(etAnnualPowerConsumption.getText().toString().isEmpty()){

@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 
 public class SmartMeter {
 
+    private static final String TAG = "SmartMeter";
     private String host;
 /* The following attributes are unused until the login for smartmeters with password authetication is implemented
     private String login;
@@ -108,8 +109,13 @@ public class SmartMeter {
             }
 
             //Refactor attributes in meaningful names
-            data = data.replace("1-0:1.4.0*255","activePowerPos");
-            data = data.replace("1-0:2.4.0*255", "activePowerNeg");
+            try {
+                data = data.replace("1-0:1.4.0*255","activePowerPos");
+                data = data.replace("1-0:2.4.0*255", "activePowerNeg");
+            }catch (Exception e){
+                Log.d(TAG, e.getMessage());
+            }
+
 
             //Parse the JSON response in a class of the WheaterData type
             try {
