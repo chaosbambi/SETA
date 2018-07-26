@@ -12,12 +12,14 @@ import android.widget.Toast;
 import com.hsowl.seta.R;
 import com.hsowl.seta.data.HouseData;
 import com.hsowl.seta.data.Storage;
+import com.hsowl.seta.logic.EnergySuggestion;
 
 public class MainActivity extends AppCompatActivity implements OnHouseDataSaveListener{
     private static final String TAG = "MainActivity";
 
     // Variables
     HouseData houseData;
+    EnergySuggestion energySuggestion;
     Storage storage;
 
     private SectionsPageAdapter mSectionsPageAdapter;
@@ -42,10 +44,10 @@ public class MainActivity extends AppCompatActivity implements OnHouseDataSaveLi
         Log.d(TAG, "onCreate: Starting");
 
         // Set up the ViewPager with the sections adapter
-        mViewPager = (ViewPager)findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         setupViewPager(mViewPager);
 
-        TabLayout tabLayout = (TabLayout)findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
         // Get shared preferences
@@ -107,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements OnHouseDataSaveLi
 
     @Override
     public void save(HouseData houseData) {
+
         this.houseData = houseData;
+        this.energySuggestion = null;
     }
 }
