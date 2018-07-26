@@ -80,6 +80,7 @@ public class HttpClient {
     public void initializeConnection(String url){
         try{
             con = (HttpURLConnection) (new URL(url).openConnection());
+            con.setConnectTimeout(5000);
             con.setRequestMethod("GET");
             con.setDoInput(true);
         }catch(Exception e){

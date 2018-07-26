@@ -36,7 +36,7 @@
     <!-- AboutFragment -->
     <string name="str_powered_by">powered by</string>
     <string name="str_version">Version 2.0</string>
-    <string name="str_disclaimer"><b>Lizenzen</b>\nBei Nutzung der unter den Bedingung dieses
+    <string name="str_disclaimer"><b>Lizenzen</b>\nBei Nutzung der unter den Bedingungen dieses
         Lizenzvertrages erworbenen Applikation, akzeptieren Sie als Lizenznehmer die Regelungen
         der Creative-Commons-Attribution-ShareAlike-2.0 und der Apache License 2.0 Softwarelizenz.
     </string>
