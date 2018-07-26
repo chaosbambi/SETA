@@ -36,6 +36,12 @@
     <!-- AboutFragment -->
     <string name="str_powered_by">powered by</string>
     <string name="str_version">Version 2.0</string>
+    <string name="str_disclaimer"><b>Disclaimer</b>\nLorem ipsum dolor sit amet, consetetur sadipscing elitr,
+        sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+        Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</string>
 
     <!-- ErrorFragment -->
     <string name="btnError">Aktualisieren</string>
