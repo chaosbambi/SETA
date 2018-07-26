@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hsowl.seta.R;
 import com.hsowl.seta.data.NoWeatherStationException;
@@ -170,6 +171,12 @@ public class HomeFragment extends Fragment {
 
         private final String TAG = GetDataAsyncTask.class.getSimpleName();
 
+        private Exception e;
+        private NoWeatherStationException nwse;
+        private SmartMeterDataRetrievalException smde;
+        private SmartMeterAuthenticationException smae;
+        private WeatherStationDataRetrievalException wde;
+
         @Override
         protected String[] doInBackground(String... strings) {
             Log.d(TAG, "doInBackground: Starting");
@@ -183,19 +190,19 @@ public class HomeFragment extends Fragment {
                 trafficLightColorsList = ((MainActivity) mainActivity).energySuggestion.getTrafficLightColors(TrafficLightColor.Yellow);
             } catch (NoWeatherStationException nwse) {
                 Log.e(TAG, nwse.getMessage());
-                //Toast.makeText(getActivity(), "Leider ist keine Wetterstation.", Toast.LENGTH_SHORT).show();
+                this.nwse = nwse;
             } catch (SmartMeterDataRetrievalException smde) {
                 Log.e(TAG, smde.getMessage());
-                //Toast.makeText(getActivity(), "Beim laden der Daten von Ihrem SmartMeter ist leider ein Fehler aufgetreten.", Toast.LENGTH_SHORT).show();
+                this.smde = smde;
             } catch (SmartMeterAuthenticationException smae) {
                 Log.e(TAG, smae.getMessage());
-                //Toast.makeText(getActivity(), "Bei der Verbindung mit ihrem SmartMeter ist leider ein Fehler aufgetreten.", Toast.LENGTH_SHORT).show();
+                this.smae = smae;
             } catch (WeatherStationDataRetrievalException wde) {
                 Log.e(TAG, wde.getMessage());
-                //Toast.makeText(getActivity(), "Bei der Abfrage der Wetterdaten ist leider ein Fehler aufgetreten.", Toast.LENGTH_SHORT).show();
+                this.wde = wde;
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
-                //Toast.makeText(getActivity(), "Leider ist ein Fehler aufgetreten. Bitte Prüfen Sie ob alle Eingaben richtig sind.", Toast.LENGTH_SHORT).show();
+                this.e = e;
 
             }
             return new String[0];
@@ -235,8 +242,27 @@ public class HomeFragment extends Fragment {
             }
 
             view.invalidate();
-
             srlSwipeRefresh.setRefreshing(false);
+
+            if(nwse != null){
+                Toast.makeText(getActivity(), "Leider ist keine Wetterstation.", Toast.LENGTH_SHORT).show();
+            }
+
+            if(smde != null){
+                Toast.makeText(getActivity(), "Beim laden der Daten von Ihrem SmartMeter ist leider ein Fehler aufgetreten.", Toast.LENGTH_SHORT).show();
+            }
+
+            if(smae != null){
+                Toast.makeText(getActivity(), "Bei der Verbindung mit ihrem SmartMeter ist leider ein Fehler aufgetreten.", Toast.LENGTH_SHORT).show();
+            }
+
+            if(wde != null){
+                Toast.makeText(getActivity(), "Bei der Abfrage der Wetterdaten ist leider ein Fehler aufgetreten.", Toast.LENGTH_SHORT).show();
+            }
+
+            if(e != null){
+                Toast.makeText(getActivity(), "Leider ist ein Fehler aufgetreten. Bitte Prüfen Sie ob alle Eingaben richtig sind.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
