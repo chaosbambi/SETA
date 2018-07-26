@@ -14,8 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hsowl.seta.R;
+import com.hsowl.seta.data.NoWeatherStationException;
+import com.hsowl.seta.data.SmartMeterAuthenticationException;
+import com.hsowl.seta.data.SmartMeterDataRetrievalException;
+import com.hsowl.seta.data.WeatherStationDataRetrievalException;
 import com.hsowl.seta.logic.EnergySuggestion;
 import com.hsowl.seta.logic.TrafficLightColor;
 
@@ -121,27 +126,30 @@ public class HomeFragment extends Fragment {
 
         try {
             trafficLightColorsList = ((MainActivity)mainActivity).energySuggestion.getTrafficLightColors(TrafficLightColor.Yellow);
+        }catch(NoWeatherStationException nwse){
+            Log.e(TAG, nwse.getMessage());
+            Toast.makeText(getActivity(), "Leider ist keine Wetterstation.", Toast.LENGTH_SHORT).show();
+        }catch(SmartMeterDataRetrievalException smde){
+            Log.e(TAG, smde.getMessage());
+            Toast.makeText(getActivity(), "Beim laden der Daten von Ihrem SmartMeter ist leider ein Fehler aufgetreten.", Toast.LENGTH_SHORT).show();
+        }catch(SmartMeterAuthenticationException smae){
+            Log.e(TAG, smae.getMessage());
+            Toast.makeText(getActivity(), "Bei der Verbindung mit ihrem SmartMeter ist leider ein Fehler aufgetreten.", Toast.LENGTH_SHORT).show();
+        }catch(WeatherStationDataRetrievalException wde){
+            Log.e(TAG, wde.getMessage());
+            Toast.makeText(getActivity(), "Bei der Abfrage der Wetterdaten ist leider ein Fehler aufgetreten.", Toast.LENGTH_SHORT).show();
         }catch (Exception e) {
             Log.e(TAG, e.getMessage());
-            ErrorFragment errorFragment = new ErrorFragment();
+            Toast.makeText(getActivity(), "Leider ist ein Fehler aufgetreten. Bitte Prüfen Sie ob alle Eingaben richtig sind.", Toast.LENGTH_SHORT).show();
+            /*ErrorFragment errorFragment = new ErrorFragment();
 
             FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
             transaction.replace(R.id.container, errorFragment, "ErrorFragment");
 
             transaction.addToBackStack(null);
-            transaction.commit();
+            transaction.commit();*/
+
         }
-        //TODO: Differentiate between different Exceptions
-        /*
-        catch(NoWeatherStationException nwse){
-
-        }catch(SmartMeterDataRetrievalException smde){
-
-        }catch(SmartMeterAuthenticationException smae){
-
-        }catch(WeatherStationDataRetrievalException wde){
-
-        }*/
     }
 
     private void updateTrafficLightViews(View view) {
