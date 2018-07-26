@@ -5,6 +5,7 @@ import com.hsowl.seta.data.HouseData;
 import com.hsowl.seta.data.NoWeatherStationException;
 import com.hsowl.seta.data.SmartMeterAuthenticationException;
 import com.hsowl.seta.data.SmartMeterDataRetrievalException;
+import com.hsowl.seta.data.WeatherStationDataRetrievalException;
 
 import java.util.ArrayList;
 
@@ -50,7 +51,7 @@ public class EnergySuggestion {
         return suggestions;
     }
 
-    public TrafficLightColor [] getTrafficLightColors(TrafficLightColor curColor) throws NoWeatherStationException, SmartMeterDataRetrievalException, SmartMeterAuthenticationException {
+    public TrafficLightColor [] getTrafficLightColors(TrafficLightColor curColor) throws NoWeatherStationException, SmartMeterDataRetrievalException, SmartMeterAuthenticationException, WeatherStationDataRetrievalException {
         //get current power consumption
         double[] activePowPlusPredict = new double[24];
         houseData.getPowerConsumptionPrediction(activePowPlusPredict);
@@ -90,18 +91,18 @@ public class EnergySuggestion {
         TrafficLightColor nextColor = curColor;
         //case 1 : the boundary red to yellow is undercut by the hysteresis -> traffic light turns yellow
 
-        if(curColor == TrafficLightColor.Red && power - hyst < yellow_max){
+        if(curColor == TrafficLightColor.Red && power < yellow_max - hyst){
             nextColor = TrafficLightColor.Yellow;
         //case 2 : the boundary green to yellow is exceeded by the hysteresis -> traffic light turns yellow
-        } else if( curColor == TrafficLightColor.Green && power + hyst > yellow_min){
+        } else if( curColor == TrafficLightColor.Green && power > yellow_min + hyst){
             nextColor = TrafficLightColor.Yellow;
         //case 3 : traffic light is yellow
         } else if(curColor == TrafficLightColor.Yellow){
             //case 3a : the boundary yellow to green is undercut by the hysteresis -> traffic light turns yellow
-            if(power - hyst < yellow_min){
+            if(power < yellow_min - hyst ){
                 nextColor = TrafficLightColor.Green;
             //case 3b : the boundary yellow to red is exceeded by the hysteresis -> traffic light turns yellow
-            } else if (power + hyst > yellow_max){
+            } else if (power > yellow_max + hyst){
                 nextColor = TrafficLightColor.Red;
             }
         }

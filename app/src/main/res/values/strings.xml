@@ -16,9 +16,9 @@
 
     <!-- CustomSettingsFragment -->
     <string name="ip_address">IP-Adresse</string>
-    <string name="annual_power_consumption">Jährlicher Stromverbrauch</string>
+    <string name="annual_power_consumption">Jährlicher Stromverbrauch [kWh]</string>
     <string name="zip_code">Postleitzahl</string>
-    <string name="pv_peak_power">Maximalleistung PV-Anlage</string>
+    <string name="pv_peak_power">Maximalleistung PV-Anlage [W]</string>
     <string name="azimuth">Azimut</string>
     <string name="slope">Winkel</string>
     <string name="btnApply">Bestätigen</string>

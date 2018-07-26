@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
         energySuggestion = new EnergySuggestion(((MainActivity)mainActivity).houseData);
         try {
             trafficLightColorsList = energySuggestion.getTrafficLightColors(TrafficLightColor.Yellow);
-        } catch (Exception e) {
+        }catch (Exception e) {
             Log.e(TAG, e.getMessage());
             ErrorFragment errorFragment = new ErrorFragment();
 
@@ -62,6 +62,17 @@ public class HomeFragment extends Fragment {
             transaction.addToBackStack(null);
             transaction.commit();
         }
+        //TODO: Differentiate between different Exceptions
+        /*
+        catch(NoWeatherStationException nwse){
+
+        }catch(SmartMeterDataRetrievalException smde){
+
+        }catch(SmartMeterAuthenticationException smae){
+
+        }catch(WeatherStationDataRetrievalException wde){
+
+        }*/
     }
 
     @Nullable
@@ -76,8 +87,8 @@ public class HomeFragment extends Fragment {
 //        trafficLightColorsList.add(TrafficLightColor.Red);
 
         // Current traffic light image view and recommendation text view
-        ivCurrentTrafficLight = (ImageView) view.findViewById(R.id.ivCurrentTrafficLight);
-        tvRecommendation = (TextView) view.findViewById(R.id.tvRecommendation);
+        ivCurrentTrafficLight = view.findViewById(R.id.ivCurrentTrafficLight);
+        tvRecommendation = view.findViewById(R.id.tvRecommendation);
 
         // TODO check if needed
         if (trafficLightColorsList == null)
@@ -159,7 +170,7 @@ public class HomeFragment extends Fragment {
      * @param trafficLightsForecastIntervalls
      */
     private void createCustomTrafficLightForecastView(View rootView, String[] trafficLightsForecastIntervalls) {
-        llTrafficLightsForecastView = (LinearLayout) rootView.findViewById(R.id.trafficLightsForecast);
+        llTrafficLightsForecastView = rootView.findViewById(R.id.trafficLightsForecast);
         LayoutInflater inflaterCustomView = LayoutInflater.from(getActivity());
         for(int i=0; i<trafficLightColorsList.length-1; i++){
             View view = inflaterCustomView.inflate(R.layout.traffic_light_item, llTrafficLightsForecastView, false);

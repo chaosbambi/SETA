@@ -73,7 +73,7 @@ public class HouseData {
         return weatherStation;
     }
 
-    public void getPowerConsumptionPrediction(double activePowPlusPredict[]) throws SmartMeterAuthenticationException, SmartMeterDataRetrievalException, NoWeatherStationException{
+    public void getPowerConsumptionPrediction(double activePowPlusPredict[]) throws SmartMeterAuthenticationException, SmartMeterDataRetrievalException, NoWeatherStationException, WeatherStationDataRetrievalException {
         double activePow;
         //check if user has smart meter
         if (smartMeter != null) {
@@ -100,8 +100,9 @@ public class HouseData {
                 throw new SmartMeterAuthenticationException();
             }
         } else {
-                //if the user has no smart meter, use the average power consumption instead
-                activePow = annualPowerConsumption / (365 * activePowPlusPredict.length);
+            //if the user has no smart meter, use the average power consumption instead
+            //mind that the value in annualPowerConsumption is in kWh
+            activePow = annualPowerConsumption / (365 * activePowPlusPredict.length) * 1000;
         }
 
         for (int i = 0 ; i < activePowPlusPredict.length;i++){
@@ -109,7 +110,7 @@ public class HouseData {
         }
     }
 
-    public void getPowerProductionPrediction(double activePowMinusPredict[]) throws NoWeatherStationException {
+    public void getPowerProductionPrediction(double activePowMinusPredict[]) throws NoWeatherStationException, WeatherStationDataRetrievalException {
 
         double[] weatherFactor = new double[activePowMinusPredict.length];
 
@@ -117,7 +118,7 @@ public class HouseData {
             throw new NoWeatherStationException();
         } else{
             if(weatherStation.checkForUpdates()){
-                weatherStation.updateWeatherData();
+                if (!weatherStation.updateWeatherData()) throw new WeatherStationDataRetrievalException();
             }
             weatherStation.getWeatherFactor(weatherFactor);
         }

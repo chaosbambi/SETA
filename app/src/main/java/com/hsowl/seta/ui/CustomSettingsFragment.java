@@ -70,14 +70,14 @@ public class CustomSettingsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_custom_settings, container, false);
 
-        etAnnualPowerConsumption = (EditText)view.findViewById(R.id.etAnnualPowerConsumption);
-        etPVPeakPower = (EditText)view.findViewById(R.id.etPVPeakPower);
-        etIPAddress = (EditText)view.findViewById(R.id.etIPAddress);
-        etZIPCode = (EditText)view.findViewById(R.id.etZIPCode);
-        etAzimuth = (EditText)view.findViewById(R.id.etAzimuth);
-        etSlope = (EditText)view.findViewById(R.id.etSlope);
-        btnApplyCustomSettings = (Button)view.findViewById(R.id.btnApplyCustomSettings);
-        btnAzimuthSlopeHelp = (Button)view.findViewById(R.id.btnAzimuthSlopeHelp);
+        etAnnualPowerConsumption = view.findViewById(R.id.etAnnualPowerConsumption);
+        etPVPeakPower = view.findViewById(R.id.etPVPeakPower);
+        etIPAddress = view.findViewById(R.id.etIPAddress);
+        etZIPCode = view.findViewById(R.id.etZIPCode);
+        etAzimuth = view.findViewById(R.id.etAzimuth);
+        etSlope = view.findViewById(R.id.etSlope);
+        btnApplyCustomSettings = view.findViewById(R.id.btnApplyCustomSettings);
+        btnAzimuthSlopeHelp = view.findViewById(R.id.btnAzimuthSlopeHelp);
 
         // Fill text fields with current values
         try {
@@ -179,8 +179,7 @@ public class CustomSettingsFragment extends Fragment {
                     smartMeter = new SmartMeter(etIPAddress.getText().toString());
                     houseData.setSmartMeter(smartMeter);
                 }else{
-                    smartMeter = null;
-                    houseData.setSmartMeter(smartMeter);
+                    houseData.setSmartMeter(null);
                 }
 
                 // Prove and set annual power consumption
@@ -188,8 +187,12 @@ public class CustomSettingsFragment extends Fragment {
                     Toast.makeText(getActivity(), "Bitte geben Sie einen Wert ein!", Toast.LENGTH_SHORT).show();
                     etAnnualPowerConsumption.setHintTextColor(Color.RED);
                     return;
-                }
-                else{
+                }else if(Double.valueOf(etAnnualPowerConsumption.getText().toString()) > 9999999){
+                    //Values greater 9999999 wil be representeted in scientific form
+                    Toast.makeText(getActivity(), "Es tut uns Leid. Es können leider keine Werte größer als 9.999.999kWh verarbeitet werden.", Toast.LENGTH_LONG).show();
+                    etAnnualPowerConsumption.setHintTextColor(Color.RED);
+                    return;
+                }else{
                     etAnnualPowerConsumption.setHintTextColor(Color.WHITE);
                 }
 
@@ -211,7 +214,7 @@ public class CustomSettingsFragment extends Fragment {
 
                 correctZip = weatherStation.setZip(Integer.valueOf(etZIPCode.getText().toString()));
 
-                if (correctZip == false || etZIPCode.getText().toString().isEmpty()) {
+                if (!correctZip || etZIPCode.getText().toString().isEmpty()) {
                     Toast.makeText(getActivity(), "Bitte richtige Postleitzahl eingeben!", Toast.LENGTH_SHORT).show();
                     etZIPCode.setTextColor(Color.RED);
                     return;
@@ -219,16 +222,27 @@ public class CustomSettingsFragment extends Fragment {
                     etZIPCode.setTextColor(Color.WHITE);
                 }
 
+                //Prove correct zip code and active internet connection
                 weatherStation.updateWeatherData();
-                weatherStation.updateCoordinates();
+                if(!weatherStation.updateCoordinates()){
+                    Toast.makeText(getActivity(), "Stellen Sie sicher, dass die von Ihnen angegebene Postleitzahl stimmt und eine aktive Verbindung zum Internet besteht!", Toast.LENGTH_LONG).show();
+                    etZIPCode.setTextColor(Color.RED);
+                    return;
+                } else{
+                etZIPCode.setTextColor(Color.WHITE);
+                }
 
                 // Prove and set pv peak power
                 if(etPVPeakPower.getText().toString().isEmpty()){
                     Toast.makeText(getActivity(), "Bitte geben Sie einen Wert ein!", Toast.LENGTH_SHORT).show();
                     etPVPeakPower.setHintTextColor(Color.RED);
                     return;
-                }
-                else{
+                }else if(Double.valueOf(etPVPeakPower.getText().toString()) > 9999999) {
+                    //Values greater 9999999 wil be representeted in scientific form
+                    Toast.makeText(getActivity(), "Es tut uns Leid. Es können leider keine Werte größer als 9.999.999W verarbeitet werden.", Toast.LENGTH_LONG).show();
+                    etPVPeakPower.setHintTextColor(Color.RED);
+                    return;
+                }else{
                     etPVPeakPower.setHintTextColor(Color.WHITE);
                 }
 
