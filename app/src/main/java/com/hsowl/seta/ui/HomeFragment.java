@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment {
         ivCurrentTrafficLight = view.findViewById(R.id.ivCurrentTrafficLight);
         tvRecommendation = view.findViewById(R.id.tvRecommendation);
 
-        // TODO check if needed
+        /*// TODO check if needed
         if (trafficLightColorsList == null)
         {
             ErrorFragment errorFragment = new ErrorFragment();
@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
 
             transaction.addToBackStack(null);
             transaction.commit();
-        }else {
+        }else {*/
 
             switch (trafficLightColorsList[0]) {
                 case Green:
@@ -98,16 +98,16 @@ public class HomeFragment extends Fragment {
             trafficLightsForecastIntervalls = buildIntervallsForTrafficLightForecast(1, "h");
 
             createCustomTrafficLightForecastView(view, trafficLightsForecastIntervalls);
-        }
+//        }
 
 
         //Add Listener for swipe gesture
-        srlSwipeRefresh = view.findViewById(R.id.srlMainFragment);
+        srlSwipeRefresh = (SwipeRefreshLayout)view.findViewById(R.id.srlMainFragment);
         srlSwipeRefresh.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-                        Log.i(TAG, "onRefresh: Starting");
+                        Log.d(TAG, "onRefresh: Starting");
 
                         // This methods performs the actual data-refresh operation.
                         updateTrafficLightColors();
