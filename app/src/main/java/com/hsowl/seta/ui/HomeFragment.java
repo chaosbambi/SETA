@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hsowl.seta.R;
 import com.hsowl.seta.data.NoWeatherStationException;
@@ -109,96 +108,12 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void updateTrafficLightColors(){
-        if (((MainActivity)mainActivity).energySuggestion == null){
-            ((MainActivity)mainActivity).energySuggestion = new EnergySuggestion(((MainActivity)mainActivity).houseData);
-        }
-
-        try {
-            trafficLightColorsList = ((MainActivity)mainActivity).energySuggestion.getTrafficLightColors(TrafficLightColor.Yellow);
-        }catch(NoWeatherStationException nwse){
-            Log.e(TAG, nwse.getMessage());
-            Toast.makeText(getActivity(), "Leider ist keine Wetterstation.", Toast.LENGTH_SHORT).show();
-        }catch(SmartMeterDataRetrievalException smde){
-            Log.e(TAG, smde.getMessage());
-            Toast.makeText(getActivity(), "Beim laden der Daten von Ihrem SmartMeter ist leider ein Fehler aufgetreten.", Toast.LENGTH_SHORT).show();
-        }catch(SmartMeterAuthenticationException smae){
-            Log.e(TAG, smae.getMessage());
-            Toast.makeText(getActivity(), "Bei der Verbindung mit ihrem SmartMeter ist leider ein Fehler aufgetreten.", Toast.LENGTH_SHORT).show();
-        }catch(WeatherStationDataRetrievalException wde){
-            Log.e(TAG, wde.getMessage());
-            Toast.makeText(getActivity(), "Bei der Abfrage der Wetterdaten ist leider ein Fehler aufgetreten.", Toast.LENGTH_SHORT).show();
-        }catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-            Toast.makeText(getActivity(), "Leider ist ein Fehler aufgetreten. Bitte Prüfen Sie ob alle Eingaben richtig sind.", Toast.LENGTH_SHORT).show();
-            /*ErrorFragment errorFragment = new ErrorFragment();
-
-            FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
-            transaction.replace(R.id.container, errorFragment, "ErrorFragment");
-
-            transaction.addToBackStack(null);
-            transaction.commit();*/
-
-        }
-    }
-
-    private void updateTrafficLightViews(View view) {
-
-        // TODO check if needed
-        /*if (trafficLightColorsList == null)
-        {
-            ErrorFragment errorFragment = new ErrorFragment();
-
-            FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
-            transaction.replace(R.id.container, errorFragment, "ErrorFragment");
-
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }else {*/
-
-            switch (trafficLightColorsList[0]) {
-                case Green:
-                    ivCurrentTrafficLight.setImageResource(R.drawable.traffic_light_green_v3);
-                    tvRecommendation.setText(R.string.recommendationGreen);
-                    break;
-                case Yellow:
-                    ivCurrentTrafficLight.setImageResource(R.drawable.traffic_light_yellow_v3);
-                    tvRecommendation.setText(R.string.recommendationYellow);
-                    break;
-                case Red:
-                    ivCurrentTrafficLight.setImageResource(R.drawable.traffic_light_red_v3);
-                    tvRecommendation.setText(R.string.recommendationRed);
-                    break;
-            }
-
-            // Build Forecast-Scrollbar
-            trafficLightsForecastIntervalls = buildIntervallsForTrafficLightForecast(1, "h");
-
-            createCustomTrafficLightForecastView(view, trafficLightsForecastIntervalls);
-//        }
-
-        view.invalidate();
-
-        srlSwipeRefresh.setRefreshing(false);
-    }
-
     @Override
     public void onResume() {
         super.onResume();
 
         Log.d(TAG, "onResume: starting");
 
-        // TODO check if needed
-        /*if (trafficLightColorsList == null)
-        {
-            ErrorFragment errorFragment = new ErrorFragment();
-
-            FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
-            transaction.replace(R.id.main_content, errorFragment, "ErrorFragment");
-
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }*/
     }
 
     /**
@@ -259,6 +174,7 @@ public class HomeFragment extends Fragment {
         protected String[] doInBackground(String... strings) {
             Log.d(TAG, "doInBackground: Starting");
 
+            // update traffic light colors
             if (((MainActivity) mainActivity).energySuggestion == null) {
                 ((MainActivity) mainActivity).energySuggestion = new EnergySuggestion(((MainActivity) mainActivity).houseData);
             }
@@ -280,13 +196,7 @@ public class HomeFragment extends Fragment {
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
                 //Toast.makeText(getActivity(), "Leider ist ein Fehler aufgetreten. Bitte Prüfen Sie ob alle Eingaben richtig sind.", Toast.LENGTH_SHORT).show();
-            /*ErrorFragment errorFragment = new ErrorFragment();
 
-            FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
-            transaction.replace(R.id.container, errorFragment, "ErrorFragment");
-
-            transaction.addToBackStack(null);
-            transaction.commit();*/
             }
             return new String[0];
         }
@@ -300,17 +210,8 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(String[] strings) {
 
             Log.d(TAG, "onPostExecute: Starting");
-            // TODO check if needed
-        /*if (trafficLightColorsList == null)
-        {
-            ErrorFragment errorFragment = new ErrorFragment();
 
-            FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
-            transaction.replace(R.id.container, errorFragment, "ErrorFragment");
-
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }else {*/
+            // Update traffic light views
             if (trafficLightColorsList != null) {
                 switch (trafficLightColorsList[0]) {
                     case Green:
@@ -332,7 +233,6 @@ public class HomeFragment extends Fragment {
 
                 createCustomTrafficLightForecastView(view, trafficLightsForecastIntervalls);
             }
-//        }
 
             view.invalidate();
 
