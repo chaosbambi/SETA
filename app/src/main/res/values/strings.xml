@@ -28,10 +28,11 @@
     <string name="string_azimuth_slope_info">Der <b>Azimut</b> beschreibt den Winkel zwischen
         Südrichtung und PV-Ausrichtung in Grad. Um ihn zu messen, muss lediglich ein Kompass
         parallel zur PV Anlage gehalten werden. Nun nimmt man den angegeben Wert und berechnet die
-        Differenz zur Südrichtung (180°).\n\nDie <b>Neigung</b> entspricht dem Winkel zwischen Boden
-        und Dachschräge, bzw. PV-Panel auf dem Dach. Mit einer Wasserwaagen-App kann er leicht
-        bestimmt werden. Einfach das Smartphone an die Innenseite des Dachs anlegen und den Winkel
-        ablesen.</string>
+        Differenz zur Südrichtung (180°). Weicht man z.B. um 10° von perfekter Südausrichtung
+        nach Osten ab, dann muss ein Wert von 170° eingegeben werden.\n\nDie <b>Neigung</b>
+        entspricht dem Winkel zwischen Boden und Dachschräge, bzw. PV-Panel auf dem Dach. Mit einer
+        Wasserwaagen-App kann er leicht bestimmt werden. Einfach das Smartphone an die Innenseite
+        des Dachs anlegen und den Winkel ablesen.</string>
 
     <!-- AboutFragment -->
     <string name="str_powered_by">powered by</string>
