@@ -42,18 +42,6 @@
         der Creative-Commons-Attribution-ShareAlike-2.0 und der Apache License 2.0 Softwarelizenz.
     </string>
 
-    <!-- ErrorFragment -->
-    <string name="btnError">Aktualisieren</string>
-    <string name="dialog_text">Die Verbindung ist unterbrochen!</string>
-    <string name="btnDialogError">Verstanden</string>
-
-    <!-- Menü -->
-    <string name="device_activity_menu_item">Geräte</string>
-    <string name="about_activity_menu_item">Über</string>
-    <string name="custom_settings_activity_menu_item">Einstellungen</string>
-
-    <string name="exception_first_login">Bitte geben Sie Ihre Daten ein!</string>
     <string name="action_settings">Einstellungen</string>
-
 
 </resources>

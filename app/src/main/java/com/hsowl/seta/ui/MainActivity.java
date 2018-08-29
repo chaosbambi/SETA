@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements OnHouseDataSaveLi
     EnergySuggestion energySuggestion;
     Storage storage;
 
-    private SectionsPageAdapter mSectionsPageAdapter;
     private ViewPager mViewPager;
 
     @Override
@@ -39,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements OnHouseDataSaveLi
         }
 
         setTheme(R.style.Theme_AppCompat_NoActionBar);
+        //setTheme(R.style.AppTheme);
 
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: Starting");
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements OnHouseDataSaveLi
         // First time run?
         if (pref.getBoolean("firstTimeRun", true)) {
 
-            // Start the preferences fragment
+            // Start the  CustomSettingsFragment
             tabLayout.getTabAt(1).select();
 
             // Get the preferences editor
@@ -68,9 +68,6 @@ public class MainActivity extends AppCompatActivity implements OnHouseDataSaveLi
         }
 
         super.onCreate(savedInstanceState);
-
-        // TODO evaluate if deletion possible
-        mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
     }
 

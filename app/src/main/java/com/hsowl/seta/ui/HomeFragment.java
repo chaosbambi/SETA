@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
                     break;
             }
 
-            // Build Forecast-Scrollbar
+            // Build Forecast-ScrollView
             trafficLightsForecastIntervalls = buildIntervallsForTrafficLightForecast(1, "h");
 
             createCustomTrafficLightForecastView(view, trafficLightsForecastIntervalls);
@@ -137,7 +137,7 @@ public class HomeFragment extends Fragment {
 
     /**
      * This method creates a view object that displays a linear layout filled with the traffic lights of the forecast and the forecast interval time.
-     * It is set into a HorizontalScrollView in the MainFragment
+     * It is set into a HorizontalScrollView in the HomeFragment
      * @param rootView                          the parent of ListView which is inflated
      * @param trafficLightsForecastIntervalls   string array with timestamps for the ListView elements
      */
@@ -235,7 +235,7 @@ public class HomeFragment extends Fragment {
                         break;
                 }
 
-                // Build Forecast-Scrollbar
+                // Build Forecast-ScrollView
                 trafficLightsForecastIntervalls = buildIntervallsForTrafficLightForecast(1, "h");
 
                 createCustomTrafficLightForecastView(view, trafficLightsForecastIntervalls);

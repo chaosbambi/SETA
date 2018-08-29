@@ -4,6 +4,6 @@ import com.hsowl.seta.data.HouseData;
 
 public interface OnHouseDataSaveListener {
 
-    public void save(HouseData houseData);
+    void save(HouseData houseData);
 
 }

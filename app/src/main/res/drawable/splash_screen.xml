@@ -8,7 +8,7 @@
 
     <item>
         <bitmap
-            android:src="@drawable/traffic_light_yellow_v3"
+            android:src="@drawable/seta_logo"
             android:gravity="center" />
     </item>
 
